@@ -19,6 +19,7 @@ public class BoundsCheck : MonoBehaviour
         camWidth = camHeight * Camera.main.aspect;
     }
 
+    // Checks to see if object is out of bounds
     private void LateUpdate()
     {
         Vector3 pos = transform.position;

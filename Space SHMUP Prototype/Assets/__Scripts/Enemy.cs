@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // Moves enemies in the Y direction
     public virtual void Move() {
         Vector3 tempPos = pos;
         tempPos.y -= Speed + Time.deltaTime;

@@ -34,6 +34,7 @@ public class Enemy_2 : Enemy
         birthTime = Time.time;
     }
 
+    // This enemy moves in a sinusoidal path
     public override void Move()
     {
         

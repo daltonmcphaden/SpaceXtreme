@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Enemy_1 : Enemy
 {
-    private float x0, y0; 
+    private float _x0, _y0; 
 
    // Start is called before the first frame update
     void Start()
     {
-        x0 = pos.x;
+        _x0 = pos.x;
     }
 
     // Update is called once per frame
@@ -21,13 +21,14 @@ public class Enemy_1 : Enemy
        public override void Move()
     {
         Vector3 tempPos = pos;
-        if(x0 > 0)
+        if(_x0 > 0)
         tempPos.x -= Speed + Time.deltaTime;
-        if (x0 < 0)
+        if (_x0 < 0)
         tempPos.x += Speed + Time.deltaTime;
 
         pos = tempPos;
 
+        // Call to base accounts for the movement in the Y direction
         base.Move();
 
         if (bndCheck != null && bndCheck.offDown || bndCheck.offLeft || bndCheck.offRight)

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6212310423678325650}
   - component: {fileID: 1908320533049582687}
   - component: {fileID: 8020461861775617279}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy_2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,10 +93,8 @@ MonoBehaviour:
   fireRate: 0.3
   health: 10
   score: 100
-  sinEccentricity: 0.6
   lifeTime: 10
-  p0: {x: 0, y: 0, z: 0}
-  p1: {x: 0, y: 0, z: 0}
+  points: []
   birthTime: 0
 --- !u!1 &7307581832557797610
 GameObject:
@@ -110,7 +108,7 @@ GameObject:
   - component: {fileID: 7307581832557797606}
   - component: {fileID: 7307581832557797609}
   - component: {fileID: 7307581832557797608}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cockpit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +199,7 @@ GameObject:
   - component: {fileID: 7307581832750208492}
   - component: {fileID: 7307581832750208495}
   - component: {fileID: 7307581832750208494}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ForwardWingR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +290,7 @@ GameObject:
   - component: {fileID: 7307581832902624071}
   - component: {fileID: 7307581832902624070}
   - component: {fileID: 7307581832902624073}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WingArmTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +381,7 @@ GameObject:
   - component: {fileID: 7307581833239081993}
   - component: {fileID: 7307581833239081992}
   - component: {fileID: 7307581833239081995}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ForwardWingTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -474,7 +472,7 @@ GameObject:
   - component: {fileID: 7307581833334990491}
   - component: {fileID: 7307581833334990490}
   - component: {fileID: 7307581833334990493}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WingArmR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +563,7 @@ GameObject:
   - component: {fileID: 7307581833645220201}
   - component: {fileID: 7307581833645220200}
   - component: {fileID: 7307581833645220203}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ForwardWingL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +654,7 @@ GameObject:
   - component: {fileID: 7307581833918263201}
   - component: {fileID: 7307581833918263200}
   - component: {fileID: 7307581833918263203}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WingArmL
   m_TagString: Untagged
   m_Icon: {fileID: 0}

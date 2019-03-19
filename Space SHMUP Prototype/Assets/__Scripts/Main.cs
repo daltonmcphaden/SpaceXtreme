@@ -23,6 +23,7 @@ public class Main : MonoBehaviour
 
     public void SpawnEnemy()
     {
+        // The enemy to be spawned is randomly selected from the array containing each type of enemy
         int ndx = Random.Range(0, prefabEnemies.Length);
         GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);
 
@@ -36,6 +37,7 @@ public class Main : MonoBehaviour
         float xMin = -bndCheck.camWidth + enemyPadding;
         float xMax = bndCheck.camWidth - enemyPadding;    
         
+        // Enemy_1 will spawn from the corners
         if (ndx == 1)
         {
            int p = Random.Range(0,2);
@@ -48,7 +50,7 @@ public class Main : MonoBehaviour
                pos.x = xMax;
            }
         }
-
+        // Other enemies spawn anywhere across the top of the screen
         else
         {
             pos.x = Random.Range(xMin,xMax);
@@ -58,5 +60,14 @@ public class Main : MonoBehaviour
         go.transform.position = pos;
 
         Invoke("SpawnEnemy", 1f/enemySpawnPerSecond);
+    }
+
+    public void DelayedRestart(float delay) {
+        // Invoke the Restart() method in delay seconds
+        Invoke("Restart", delay);
+    }
+
+    public void Restart() {
+        SceneManager.LoadScene("_Scene_0");
     }
 }

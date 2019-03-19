@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7657596580149760276}
   - component: {fileID: 7657596580149760279}
   - component: {fileID: 7657596580149760278}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WingTopL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 7657596580363617572}
   - component: {fileID: 7657596580363617575}
   - component: {fileID: 7657596580363617574}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WingTopR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 7657596580485595646}
   - component: {fileID: 7657596580485595633}
   - component: {fileID: 7657596580485595632}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WingBotL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 7657596580603421463}
   - component: {fileID: 7657596580603421462}
   - component: {fileID: 7657596580603421481}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cockpit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ GameObject:
   - component: {fileID: 7657596580783324501}
   - component: {fileID: 7657596580783324500}
   - component: {fileID: 7657596580783324503}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MainWingR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 7657596580906979160}
   - component: {fileID: 7657596580906979163}
   - component: {fileID: 7657596580906979162}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WingBotR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,7 +558,7 @@ GameObject:
   - component: {fileID: 7657596581317172450}
   - component: {fileID: 7657596581317172453}
   - component: {fileID: 7657596581317172452}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MainWingL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,9 +649,9 @@ GameObject:
   - component: {fileID: 3730694957006082891}
   - component: {fileID: 4176172164278915814}
   - component: {fileID: 1197471553089834164}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy_1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
