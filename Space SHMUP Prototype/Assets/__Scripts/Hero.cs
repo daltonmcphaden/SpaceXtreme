@@ -9,13 +9,20 @@ public class Hero : MonoBehaviour
     public float speed = 30;
     public float rollMult = -45;
     public float pitchMult = 30;
-    public float gameRestartDelay = 02f;
+    public float gameRestartDelay = 2f;
+    public GameObject projectilePrefab;
+    public float projectileSpeed = 40;
 
     [Header("Set Dynamically")]
     [SerializeField]
     private float    _shieldLevel = 4;
 
     private GameObject _lastTriggerGo = null;
+
+    //declare new delagate
+    public delegate void WeaponFireDelegate();
+    //create weaponfiredeligate field
+    public WeaponFireDelegate fireDelegate;
 
     private void Awake()
     {
@@ -42,6 +49,11 @@ public class Hero : MonoBehaviour
 
         // Hero ship also rotates when it moves
         transform.rotation = Quaternion.Euler(yAxis * pitchMult, -xAxis * pitchMult, 0);
+
+        //allow the ship to fire using fire delegate
+        if (Input.GetAxis("Jump") == 1 && fireDelegate != null){
+            fireDelegate();
+        }
     }
 
     void OnTriggerEnter(Collider other){
@@ -76,5 +88,4 @@ public class Hero : MonoBehaviour
             }
         }
     }
-
 }
