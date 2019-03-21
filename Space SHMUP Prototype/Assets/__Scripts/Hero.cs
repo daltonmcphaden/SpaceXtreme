@@ -13,6 +13,8 @@ public class Hero : MonoBehaviour
     public GameObject projectilePrefab;
     public float projectileSpeed = 40;
 
+    public Weapon weapon;
+
     [Header("Set Dynamically")]
     [SerializeField]
     private float    _shieldLevel = 4;
@@ -54,6 +56,16 @@ public class Hero : MonoBehaviour
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null){
             fireDelegate();
         }
+        //Allows swapping between the blaster and the spread weapon 
+        if (Input.GetKeyDown(KeyCode.H)) {
+          if (weapon.type == WeaponType.blaster){
+              weapon.type = WeaponType.spread;
+          }
+          else {
+              weapon.type = WeaponType.blaster;
+          }
+        }
+        
     }
 
     void OnTriggerEnter(Collider other){

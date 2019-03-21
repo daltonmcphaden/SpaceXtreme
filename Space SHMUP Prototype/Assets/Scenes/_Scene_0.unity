@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -303,6 +303,18 @@ Transform:
   m_Father: {fileID: 835370834}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!114 &409097950 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9103044821818218510, guid: 52201e07e8707f14999c231fa643ed9b,
+    type: 3}
+  m_PrefabInstance: {fileID: 4026619030413010644}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f94ffd5ea0baf9408f157cf1401cce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,6 +628,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8358433677951832187, guid: 1d4a74b7f9856884a891db69913c0e8f,
     type: 3}
   projectileSpeed: 40
+  weapon: {fileID: 409097950}
   _shieldLevel: 4
 --- !u!4 &835370834
 Transform:
@@ -817,7 +830,7 @@ PrefabInstance:
     - target: {fileID: 9103044821818218510, guid: 52201e07e8707f14999c231fa643ed9b,
         type: 3}
       propertyPath: _type
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52201e07e8707f14999c231fa643ed9b, type: 3}

@@ -15,7 +15,7 @@ public class WeaponDefinition
     public Color color = Color.white; //color of collar & power up
     public GameObject projectilePrefab;
     public Color projectileColor = Color.white;
-    public float damageOnHit = 0, continousDamage = 0, delayBetweenShots = 0, velocity = 20;
+    public float damageOnHit = 2, continousDamage = 0, delayBetweenShots = 0, velocity = 20;
 }
 public class Weapon : MonoBehaviour
 {
