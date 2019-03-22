@@ -707,8 +707,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0.1
   fireRate: 0.3
-  health: 10
-  score: 15
+  health: 2
+  score: 2
   main: {fileID: 0}
 --- !u!114 &1197471553089834164
 MonoBehaviour:

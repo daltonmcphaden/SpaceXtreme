@@ -10,7 +10,6 @@ public class Enemy_1 : Enemy
    // Start is called before the first frame update
     void Start()
     {
-        health = 5; // set this enemies health to 5, requiring 3 hits, moves slowly but diagonally, so slightly harder to hit)
         _x0 = pos.x;
     }
 

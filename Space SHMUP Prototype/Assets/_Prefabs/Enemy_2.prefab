@@ -91,8 +91,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0.1
   fireRate: 0.3
-  health: 10
-  score: 5
+  health: 1
+  score: 1
   main: {fileID: 0}
   lifeTime: 10
   points: []

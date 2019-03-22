@@ -11,14 +11,12 @@ public class Main : MonoBehaviour
 
     [Header("Set in Inspector")]
     public GameObject[] prefabEnemies;
-    public float enemySpawnPerSecond = 0.5f;
+    public float enemySpawnPerSecond;
     public float enemyDefaultPadding = 1.5f;
     public WeaponDefinition[] weaponDefinitions;
 
     public Text currScoreText;
     public Text highScoreText;
-    private int _currScore;
-    private int _highScore;
     
     private BoundsCheck bndCheck;
 
@@ -33,25 +31,24 @@ public class Main : MonoBehaviour
 
         foreach (WeaponDefinition def in weaponDefinitions)
             WEAP_DICT.Add(def.type, def);
-        
-        _highScore = 0;
-        _currScore = 0;
+
+        Score.score = 0;
         SetCurrentScore();
+        SetHighScore();
     }
 
     void SetCurrentScore()
     {
-        currScoreText.text = "Score: " + _currScore.ToString();
+        currScoreText.text = "Score: " + Score.score.ToString();
     }
 
     void SetHighScore()
     {
-        highScoreText.text = "High Score: " + _highScore.ToString();
+        highScoreText.text = "High Score: " + Score.highScore.ToString();
     }
 
-    public void AddScore(int newScoreValue)
+    void Update()
     {
-        _currScore += newScoreValue;
         SetCurrentScore();
     }
 
@@ -97,8 +94,8 @@ public class Main : MonoBehaviour
     }
 
     public void DelayedRestart(float delay) {
-        if(_currScore > _highScore){
-            _highScore = _currScore;
+        if(Score.score > Score.highScore){
+            Score.highScore = Score.score;
             SetHighScore();
         }
         // Invoke the Restart() method in delay seconds
@@ -107,7 +104,6 @@ public class Main : MonoBehaviour
 
     public void Restart() {
         SceneManager.LoadScene("_Scene_0");
-        SetHighScore();
     }
 
     static public WeaponDefinition GetWeaponDefinition(WeaponType weaponType)

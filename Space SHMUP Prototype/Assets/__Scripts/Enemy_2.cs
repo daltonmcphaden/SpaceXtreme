@@ -15,7 +15,6 @@ public class Enemy_2 : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        health = 1; // set enemies health to 1 (this is the fast one, requires 1 hit)
         points = new Vector3[3];
         points[0] = pos;
         float xMin = -bndCheck.camWidth + bndCheck.radius;

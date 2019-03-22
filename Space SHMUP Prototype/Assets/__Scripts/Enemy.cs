@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
     public float fireRate = 0.3f;
     public float health; // base enemy moves slowly and down in a straight line, requires 5 hits
     public int score;
-    public Main main;
 
     protected BoundsCheck bndCheck;
 
@@ -23,15 +22,6 @@ public class Enemy : MonoBehaviour
 
     void Awake() {
         bndCheck = GetComponent<BoundsCheck>();
-        GameObject mainObject = GameObject.FindWithTag("MainCamera");
-        if (mainObject != null)
-        {
-            main = mainObject.GetComponent <Main>();
-        }
-        if (mainObject == null)
-        {
-            Debug.Log ("Cannot find 'Main' script");
-        }
     }
 
     // Update is called once per frame
@@ -72,7 +62,7 @@ public class Enemy : MonoBehaviour
                 if (health <=0){
                     this.gameObject.SetActive(false);
                     Destroy(this.gameObject); //Destroy this enemy
-                    main.AddScore(this.score);
+                    Score.AddScore(this.score);
                 }
                 //set projectile to inactive to remove bounce effect from the collision
                 otherGO.SetActive(false);

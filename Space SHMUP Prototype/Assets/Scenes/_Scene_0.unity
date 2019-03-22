@@ -415,7 +415,7 @@ MonoBehaviour:
   - {fileID: 2291002829467863255, guid: 7e1e1084bd00a194b94e0ac683a64a18, type: 3}
   - {fileID: 7657596581538728032, guid: d4cf5a452f6574a49b13bd007ee47f49, type: 3}
   - {fileID: 7307581832486563917, guid: 234c58bf0c18dda4a87a22439db58a33, type: 3}
-  enemySpawnPerSecond: 0.5
+  enemySpawnPerSecond: 3
   enemyDefaultPadding: 1.5
   weaponDefinitions:
   - type: 1
