@@ -526,7 +526,8 @@ MonoBehaviour:
   Speed: 0.1
   fireRate: 0.3
   health: 10
-  score: 100
+  score: 10
+  main: {fileID: 0}
 --- !u!114 &5472814672976332435
 MonoBehaviour:
   m_ObjectHideFlags: 0

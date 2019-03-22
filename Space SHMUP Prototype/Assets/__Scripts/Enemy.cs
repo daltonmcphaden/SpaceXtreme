@@ -6,8 +6,9 @@ public class Enemy : MonoBehaviour
 {
     public float Speed = 0.1f;
     public float fireRate = 0.3f;
-    public float health = 10; // base enemy moves slowly and down in a straight line, requires 5 hits
-    public int score = 100;
+    public float health; // base enemy moves slowly and down in a straight line, requires 5 hits
+    public int score;
+    public Main main;
 
     protected BoundsCheck bndCheck;
 
@@ -22,6 +23,15 @@ public class Enemy : MonoBehaviour
 
     void Awake() {
         bndCheck = GetComponent<BoundsCheck>();
+        GameObject mainObject = GameObject.FindWithTag("MainCamera");
+        if (mainObject != null)
+        {
+            main = mainObject.GetComponent <Main>();
+        }
+        if (mainObject == null)
+        {
+            Debug.Log ("Cannot find 'Main' script");
+        }
     }
 
     // Update is called once per frame
@@ -40,30 +50,29 @@ public class Enemy : MonoBehaviour
         tempPos.y -= Speed + Time.deltaTime;
         pos = tempPos;
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         GameObject otherGO = collision.gameObject;
-
         //make sure the game object it colided with is a projectile
         switch (otherGO.gameObject.tag) {
 
             case "ProjectileHero":
-            Projectile p = otherGO.GetComponent<Projectile>();
-            if (!bndCheck.isOnScreen){
+                Projectile p = otherGO.GetComponent<Projectile>();
+                if (!bndCheck.isOnScreen){
+                    Destroy(otherGO);
+                    break;
+                }
+                health -= Main.GetWeaponDefinition(p.type).damageOnHit;
+                if (health <=0){
+                    Destroy(this.gameObject); //Destroy this enemy
+                    main.AddScore(this.score);
+                }
                 Destroy(otherGO);
                 break;
-            }
-            health -= Main.GetWeaponDefinition(p.type).damageOnHit;
-            if (health <=0){
-                Destroy(this.gameObject); //Destroy this enemy
-            }
-            Destroy(otherGO);
-            break;
 
             default:
-            print("Enemy hit by non-{ProjectileHero: " + otherGO.name);
-            break;
+                print("Enemy hit by non-{ProjectileHero: " + otherGO.name);
+                break;
         }
     }
 }

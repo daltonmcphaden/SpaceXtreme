@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class Main : MonoBehaviour
     public float enemySpawnPerSecond = 0.5f;
     public float enemyDefaultPadding = 1.5f;
     public WeaponDefinition[] weaponDefinitions;
+
+    public Text currScoreText;
+    public Text highScoreText;
+    private int _currScore;
+    private int _highScore;
     
     private BoundsCheck bndCheck;
 
@@ -28,6 +34,25 @@ public class Main : MonoBehaviour
         foreach (WeaponDefinition def in weaponDefinitions)
             WEAP_DICT.Add(def.type, def);
         
+        _highScore = 0;
+        _currScore = 0;
+        SetCurrentScore();
+    }
+
+    void SetCurrentScore()
+    {
+        currScoreText.text = "Score: " + _currScore.ToString();
+    }
+
+    void SetHighScore()
+    {
+        highScoreText.text = "High Score: " + _highScore.ToString();
+    }
+
+    public void AddScore(int newScoreValue)
+    {
+        _currScore += newScoreValue;
+        SetCurrentScore();
     }
 
     public void SpawnEnemy()
@@ -72,12 +97,17 @@ public class Main : MonoBehaviour
     }
 
     public void DelayedRestart(float delay) {
+        if(_currScore > _highScore){
+            _highScore = _currScore;
+            SetHighScore();
+        }
         // Invoke the Restart() method in delay seconds
         Invoke("Restart", delay);
     }
 
     public void Restart() {
         SceneManager.LoadScene("_Scene_0");
+        SetHighScore();
     }
 
     static public WeaponDefinition GetWeaponDefinition(WeaponType weaponType)
