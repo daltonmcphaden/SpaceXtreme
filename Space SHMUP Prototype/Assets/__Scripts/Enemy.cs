@@ -53,20 +53,29 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject otherGO = collision.gameObject;
+
+        //check to see if projectile is active and if its not return
+        if (!otherGO.activeSelf)
+            return;
+
         //make sure the game object it colided with is a projectile
         switch (otherGO.gameObject.tag) {
 
             case "ProjectileHero":
                 Projectile p = otherGO.GetComponent<Projectile>();
                 if (!bndCheck.isOnScreen){
+                    otherGO.SetActive(false);
                     Destroy(otherGO);
                     break;
                 }
                 health -= Main.GetWeaponDefinition(p.type).damageOnHit;
                 if (health <=0){
+                    this.gameObject.SetActive(false);
                     Destroy(this.gameObject); //Destroy this enemy
                     main.AddScore(this.score);
                 }
+                //set projectile to inactive to remove bounce effect from the collision
+                otherGO.SetActive(false);
                 Destroy(otherGO);
                 break;
 
