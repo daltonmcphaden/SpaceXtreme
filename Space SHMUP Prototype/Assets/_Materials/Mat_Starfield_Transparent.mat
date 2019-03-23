@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_Starfield
+  m_Name: Mat_Starfield_Transparent
   m_Shader: {fileID: 4800000, guid: 7a80e71dafe87471ca6aa6d0d4bc61e3, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
