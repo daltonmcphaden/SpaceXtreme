@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponType
+public enum WeaponType // Enum definition for all the weapons
 {
     none, blaster, spread, phaser, missile, laser, sheild
 }
@@ -13,9 +13,9 @@ public class WeaponDefinition
     public WeaponType type = WeaponType.none;
     public string letter; //letter to show on the powerup
     public Color color = Color.white; //color of collar & power up
-    public GameObject projectilePrefab;
-    public Color projectileColor = Color.white;
-    public float damageOnHit = 2, continousDamage = 0, delayBetweenShots = 0, velocity = 20;
+    public GameObject projectilePrefab; // projectile game object
+    public Color projectileColor = Color.white; //base projectile is white
+    public float damageOnHit = 2, continousDamage = 0, delayBetweenShots = 0, velocity = 20; //weapon fire properties damage, delay, velocity of projectile
 }
 public class Weapon : MonoBehaviour
 {
@@ -52,13 +52,13 @@ public class Weapon : MonoBehaviour
             rootGO.GetComponent<Hero>().fireDelegate += Fire;
         }
     }
-
+//gets and sets weapon type
     public WeaponType type
     {
         get { return _type; }
         set { SetType(value); }
     }
-
+//sets weapon type and if nothing is passed sets it to default weapon
     public void SetType(WeaponType weaponType)
     {
         _type = weaponType;
@@ -73,7 +73,7 @@ public class Weapon : MonoBehaviour
         }
 
         def = Main.GetWeaponDefinition(_type);
-        _collarRend.material.color = def.color;
+        _collarRend.material.color = def.color; // sets collar colour depending on weapon in use
         lastShotTime = 0; 
     }
 
@@ -92,8 +92,9 @@ public class Weapon : MonoBehaviour
 
         if (transform.up.y < 0)
             vel.y = -vel.y;
-
-        switch (type)
+        
+        //switch statement for weapon types
+        switch (type) 
         {
             case WeaponType.blaster:
                 p = MakeProjectile();
@@ -118,22 +119,22 @@ public class Weapon : MonoBehaviour
     }
     public Projectile MakeProjectile()
     {
-        GameObject gameObj = Instantiate<GameObject>(def.projectilePrefab);
-        if (transform.parent.gameObject.tag == "Hero")
+        GameObject gameObj = Instantiate<GameObject>(def.projectilePrefab); //makes projectile object from the prefab
+        if (transform.parent.gameObject.tag == "Hero") //if projeectile coming from hero, sets projectile tag and layer to projectileHero
         {
             gameObj.tag = "ProjectileHero";
             gameObj.layer = LayerMask.NameToLayer("ProjectileHero");
         }
-        else
+        else //same as above for enemy projactiles
         {
             gameObj.tag = "ProjectileEnemy";
             gameObj.layer = LayerMask.NameToLayer("ProjectileEnemy");
         }
-        gameObj.transform.position = collar.transform.position;
+        gameObj.transform.position = collar.transform.position; // movement of weapon collar
         gameObj.transform.SetParent(PROJECTILE_ANCHOR, true);
-        Projectile p = gameObj.GetComponent<Projectile>();
-        p.type = type;
-        lastShotTime = Time.time;
-        return p;
+        Projectile p = gameObj.GetComponent<Projectile>(); // sets a projectile pointer variable to projectile object
+        p.type = type; //sets type of pointer to type of projectile
+        lastShotTime = Time.time; //sets last shot time to time projectile was shot
+        return p; //returns the pointer variable
     }
 }

@@ -41,7 +41,8 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float xAxis = Input.GetAxis("Horizontal");
+        // Move Hero
+        float xAxis = Input.GetAxis("Horizontal"); 
         float yAxis = Input.GetAxis("Vertical");
 
         Vector3 pos = transform.position;
@@ -52,11 +53,11 @@ public class Hero : MonoBehaviour
         // Hero ship also rotates when it moves
         transform.rotation = Quaternion.Euler(yAxis * pitchMult, -xAxis * pitchMult, 0);
 
-        //allow the ship to fire using fire delegate
+        // allow the ship to fire using fire delegate
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null){
             fireDelegate();
         }
-        //Allows swapping between the blaster and the spread weapon 
+        // Allows swapping between the blaster and the spread weapon 
         if (Input.GetKeyDown(KeyCode.H)) {
           if (weapon.type == WeaponType.blaster){
               weapon.type = WeaponType.spread;
@@ -69,6 +70,7 @@ public class Hero : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other){
+        // Collision detection for the shield
         Transform rootT = other.gameObject.transform.root;
         GameObject go = rootT.gameObject;
 
@@ -86,6 +88,7 @@ public class Hero : MonoBehaviour
         }
     }
 
+// property for shield level
     public float shieldLevel {
         get {
             return (_shieldLevel);

@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private WeaponType _type;
 
-    //public property
+    // property to set or get the weapon type
     public WeaponType type
     {
         get
@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
     }
 
 
-    void Awake()
+    void Awake() // gets components
     {
         _bndCheck = GetComponent<BoundsCheck>();
         _rend = GetComponent<Renderer>();

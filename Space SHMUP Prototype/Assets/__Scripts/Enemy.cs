@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float Speed = 0.1f;
-    public float fireRate = 0.3f;
+    public float Speed = 0.1f; //base enemy move speed
+    public float fireRate = 0.3f; //fire rate to be implemented when the enemies start shooting
     public float health; // base enemy moves slowly and down in a straight line, requires 5 hits
-    public int score;
+    public int score; //score gained for destroying enemies
 
-    protected BoundsCheck bndCheck;
+    protected BoundsCheck bndCheck; //bounds check variable
 
-    public Vector3 pos {
+    public Vector3 pos { 
         get {
             return(this.transform.position);
         }
@@ -21,15 +21,15 @@ public class Enemy : MonoBehaviour
     }
 
     void Awake() {
-        bndCheck = GetComponent<BoundsCheck>();
+        bndCheck = GetComponent<BoundsCheck>(); // set boundscheck components
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
+        Move(); // calls virtual move function
 
-        if (bndCheck != null && bndCheck.offDown) {
+        if (bndCheck != null && bndCheck.offDown) { // bounds check that destroys object if off screen
             Destroy(gameObject);
         }
     }
@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
         tempPos.y -= Speed + Time.deltaTime;
         pos = tempPos;
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision) 
     {
         GameObject otherGO = collision.gameObject;
 
@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
 
             case "ProjectileHero":
                 Projectile p = otherGO.GetComponent<Projectile>();
-                if (!bndCheck.isOnScreen){
+                if (!bndCheck.isOnScreen){ // in case the weapon shot hits an off screen enemy
                     otherGO.SetActive(false);
                     Destroy(otherGO);
                     break;
