@@ -18,12 +18,12 @@ public class Main : MonoBehaviour
     public Text currScoreText;
     public Text highScoreText;
     
-    private BoundsCheck bndCheck;
+    private BoundsCheck _bndCheck;
 
     void Awake()
     {
         S = this;
-        bndCheck = GetComponent<BoundsCheck>();
+        _bndCheck = GetComponent<BoundsCheck>();
         Invoke("SpawnEnemy", 1f/enemySpawnPerSecond);
 
         //dictionary with weapontype as the key
@@ -65,8 +65,8 @@ public class Main : MonoBehaviour
         }
         
         Vector3 pos = Vector3.zero;
-        float xMin = -bndCheck.camWidth + enemyPadding;
-        float xMax = bndCheck.camWidth - enemyPadding;    
+        float xMin = -_bndCheck.camWidth + enemyPadding;
+        float xMax = _bndCheck.camWidth - enemyPadding;    
         
         // Enemy_1 will spawn from the corners
         if (ndx == 1)
@@ -87,7 +87,7 @@ public class Main : MonoBehaviour
             pos.x = Random.Range(xMin,xMax);
         }
         
-        pos.y = bndCheck.camHeight + enemyPadding;
+        pos.y = _bndCheck.camHeight + enemyPadding;
         go.transform.position = pos;
 
         Invoke("SpawnEnemy", 1f/enemySpawnPerSecond);
