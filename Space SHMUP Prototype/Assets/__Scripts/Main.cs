@@ -10,15 +10,36 @@ public class Main : MonoBehaviour
     static Dictionary<WeaponType, WeaponDefinition> WEAP_DICT; // Weapon Dictionary
 
     [Header("Set in Inspector")]
-    public GameObject[] prefabEnemies; // Enemy Prefabs
-    public float enemySpawnPerSecond; // Spawn Rate 
-    public float enemyDefaultPadding = 1.5f;
-    public WeaponDefinition[] weaponDefinitions; // Weapon Definition Array
+    public GameObject[]         prefabEnemies; // Enemy Prefabs
+    public float                enemySpawnPerSecond; // Spawn Rate 
+    public float                enemyDefaultPadding = 1.5f;
+    public WeaponDefinition[]   weaponDefinitions; // Weapon Definition Array
+    public GameObject           prefabPowerUp;      // this will hold the prefab for all powerups
+    public WeaponType[]         powerUpFrequency = new WeaponType [] {WeaponType.blaster, WeaponType.blaster, 
+                                                                        WeaponType.spread, WeaponType.shield };     // Frequency of each powerup
 
     public Text currScoreText; // Current Score
     public Text highScoreText; // High Score
     
     private BoundsCheck _bndCheck; // Bounds Check Object
+
+    public void ShipDestroyed( Enemy e ) {      // Called by an enemy ship each time one is destroyed
+        // Potentially generate a powerup
+        if (Random.value <= e.powerUpDropChance) {      // Random value between 0 and 1 generated, each ship has its own drop chance
+            // Choose which powerup to pick
+            // Pick one from the possibilities in powerUpFrequency
+            int ndx = Random.Range(0, powerUpFrequency.Length);         // picks a random value in the range
+            WeaponType puType = powerUpFrequency[ndx];
+            // Spawn a powerup
+            GameObject go = Instantiate(prefabPowerUp) as GameObject;
+            PowerUp pu = go.GetComponent<PowerUp>();
+            // Set it to the proper weapontype
+            pu.SetType(puType);                     // Once a powerup is selected, the powerup SetType method handles the colour and text
+
+            // Set it to the position of the destroyed ship
+            pu.transform.position = e.transform.position;
+        }
+    }
 
     void Awake()
     {

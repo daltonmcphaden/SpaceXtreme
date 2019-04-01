@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float Speed = 0.1f; //base enemy move speed
-    public float fireRate = 0.3f; //fire rate to be implemented when the enemies start shooting
-    public float health; // base enemy moves slowly and down in a straight line, requires 5 hits
-    public int score; //score gained for destroying enemies
+    public float        Speed = 0.1f; //base enemy move speed
+    public float        fireRate = 0.3f; //fire rate to be implemented when the enemies start shooting
+    public float        health; // base enemy moves slowly and down in a straight line, requires 5 hits
+    public int          score; //score gained for destroying enemies
+    public float        powerUpDropChance = 0.2f;     // Chance it will drop a powerup when destroyed
 
     protected BoundsCheck bndCheck; //bounds check variable
 
@@ -53,13 +54,14 @@ public class Enemy : MonoBehaviour
 
             case "ProjectileHero":
                 Projectile p = otherGO.GetComponent<Projectile>();
-                if (!bndCheck.isOnScreen){ // in case the weapon shot hits an off screen enemy
+                if (!bndCheck.isOnScreen){          // in case the weapon shot hits an off screen enemy
                     otherGO.SetActive(false);
                     Destroy(otherGO);
                     break;
                 }
                 health -= Main.GetWeaponDefinition(p.type).damageOnHit;
                 if (health <=0){
+                    Main.S.ShipDestroyed(this);             // Tell the main singleton that this ship was destroyed
                     this.gameObject.SetActive(false);
                     Destroy(this.gameObject); //Destroy this enemy
                     Score.AddScore(this.score);
