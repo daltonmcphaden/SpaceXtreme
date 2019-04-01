@@ -12,6 +12,7 @@ public class Hero : MonoBehaviour
     public float gameRestartDelay = 2f;
     public GameObject projectilePrefab;
     public float projectileSpeed = 40;
+    public Weapon [] weapons;
 
     public Weapon weapon;
 
@@ -58,14 +59,14 @@ public class Hero : MonoBehaviour
             fireDelegate();
         }
         // Allows swapping between the blaster and the spread weapon 
-        if (Input.GetKeyDown(KeyCode.H)) {
-          if (weapon.type == WeaponType.blaster){
-              weapon.type = WeaponType.spread;
-          }
-          else {
-              weapon.type = WeaponType.blaster;
-          }
-        }
+        // if (Input.GetKeyDown(KeyCode.H)) {
+        //   if (weapon.type == WeaponType.blaster){
+        //       weapon.type = WeaponType.spread;
+        //   }
+        //   else {
+        //       weapon.type = WeaponType.blaster;
+        //   }
+        // }
         
     }
 
@@ -83,9 +84,40 @@ public class Hero : MonoBehaviour
         if (go.tag == "Enemy"){     // If the shield was triggered by an enemy
             shieldLevel--;
             Destroy(go);
-        } else {
-            print("Triggered by non-enemy " + go.name);
+        } 
+
+        else if (go.tag == "PowerUp") {
+            // If the shield was triggered by a PowerUp
+            AbsorbPowerUp(go);
+        } 
+        
+        else {
+            print("Triggered by non-enemy: " + go.name);
         }
+    }
+
+    public void AbsorbPowerUp( GameObject go ) {
+        PowerUp pu = go.GetComponent<PowerUp>();
+        switch (pu.type) {
+
+            case WeaponType.shield:     // if powerup is a shield, increase the shield level by 1
+                shieldLevel++;
+                break;
+
+            default:                    // by default all other powerups wiil be weapons
+
+                if (pu.type == weapons[0].type) {       // if the powerup is the same weapontype as the existing weapon, search for an unused weapon slot and attempt to set that empty slot to the same weapon type
+                    Weapon w = GetEmptyWeaponSlot();
+                    if (w != null) {
+                        w.SetType(pu.type);
+                    }
+                } else {                // if the powerup is a different weapon type, clear weapon slots and set weapon_0 to the weapon type that was picked up
+                    ClearWeapons();
+                    weapons[0].SetType(pu.type);
+                }
+                break;
+        }
+        pu.AbsorbedBy( this.gameObject );
     }
 
 // property for shield level
@@ -103,4 +135,20 @@ public class Hero : MonoBehaviour
             }
         }
     }
+
+    Weapon GetEmptyWeaponSlot() {
+        for (int i = 0; i < weapons.Length; i++) {
+            if ( weapons[i].type == WeaponType.none ) {
+                return (weapons[i]);
+            }
+        }
+        return null;
+    }
+
+    void ClearWeapons() {
+        foreach (Weapon w in weapons) {
+            w.SetType(WeaponType.none);
+        }
+    }
+
 }
