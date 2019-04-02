@@ -58,15 +58,6 @@ public class Hero : MonoBehaviour
         if (Input.GetAxis("Jump") == 1 && fireDelegate != null){
             fireDelegate();
         }
-        // Allows swapping between the blaster and the spread weapon 
-        // if (Input.GetKeyDown(KeyCode.H)) {
-        //   if (weapon.type == WeaponType.blaster){
-        //       weapon.type = WeaponType.spread;
-        //   }
-        //   else {
-        //       weapon.type = WeaponType.blaster;
-        //   }
-        // }
         
     }
 
