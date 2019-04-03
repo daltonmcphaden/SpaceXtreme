@@ -134,6 +134,13 @@ public class Main : MonoBehaviour
                     pos.y = _bndCheck.camHeight + enemyPadding;
                     go.transform.position = pos;
 
+                    if (_gameOver) // if the hero ship dies this will break the spawn loop and desplay restart text
+                    {
+                        restartText.text = "Press 'R' For Restart";
+                        _restart = true;
+                        break;
+                    }
+
                     yield return new WaitForSeconds(1f / enemySpawnPerSecond);//wait between spawning enemys
                 }
 
@@ -152,7 +159,7 @@ public class Main : MonoBehaviour
                 break;
             }
             
-            if (enemysLeft == 0) //once all the enemys in this level have been destroyed
+            if (enemysLeft <= 0) //once all the enemys in this level have been destroyed
             {
                 _numLevel++; //increment level
                 _numEnemy += 10; //make more enemys than previous level
