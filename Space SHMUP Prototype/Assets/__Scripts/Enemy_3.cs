@@ -39,9 +39,7 @@ public class Enemy_3 : Enemy
             if (!trigger)
             {
                 //if the ship has not entered trigger distance move down the screen
-                Vector3 tempPos = pos;
-                tempPos.y -= speed + Time.deltaTime;
-                pos = tempPos;
+                base.Move();
             }
             else
             {
@@ -51,10 +49,19 @@ public class Enemy_3 : Enemy
     }
     private void Update()
     {
-        if (bndCheck != null && bndCheck.offDown) // bounds check that destroys object if off screen
-        { 
-            Main.enemysLeft--;
+        //bounds checking, if the enemy goes off screen it gets destroyed
+        if (bndCheck != null && bndCheck.offDown)
+        {
+            if (pos.y < bndCheck.camHeight - bndCheck.radius)
+            {
+                Destroy(gameObject);
+                Main.enemysLeft--;
+            }
+        }
+        if (bndCheck.offLeft || bndCheck.offRight) //this enemy should never go off the screen to the left or right
+        {
             Destroy(gameObject);
+            Main.enemysLeft--;
         }
     }
 
