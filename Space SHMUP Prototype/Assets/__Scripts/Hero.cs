@@ -128,11 +128,19 @@ public class Hero : MonoBehaviour
     }
 
     Weapon GetEmptyWeaponSlot() {
-        for (int i = 0; i < weapons.Length; i++) {
+        if (weapons[0].type == WeaponType.spread)
+        for (int i = 0; i < 5; i++) {
             if ( weapons[i].type == WeaponType.none ) {
                 return (weapons[i]);
             }
         }
+        if (weapons[0].type == WeaponType.spray)
+        for (int i = 5; i < weapons.Length; i++) {
+            if ( weapons[i].type == WeaponType.none ) {
+                return (weapons[i]);
+            }
+        }
+
         return null;
     }
 

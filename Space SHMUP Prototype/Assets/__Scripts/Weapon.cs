@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum WeaponType // Enum definition for all the weapons
 {
-    none, blaster, spread, phaser, missile, laser, shield
+    none, blaster, spread, spray, missile, laser, shield
 }
 
 [System.Serializable]
@@ -114,6 +114,13 @@ public class Weapon : MonoBehaviour
                 p = MakeProjectile();
                 p.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
                 p.rigid.velocity = p.transform.rotation * vel;
+                break;
+
+            case WeaponType.spray:
+
+                //center projectile
+                p = MakeProjectile();
+                p.rigid.velocity = vel;  
                 break;
         }
     }
