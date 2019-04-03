@@ -137,7 +137,7 @@ public class Main : MonoBehaviour
                     yield return new WaitForSeconds(1f / enemySpawnPerSecond);//wait between spawning enemys
                 }
 
-                if (_numLevel== 2)//add another class of enemys for level 2
+                if (_numLevel== 2)//add another class of enemys for level 3
                 {
                     _enemyClasses++;
                 }
@@ -152,7 +152,7 @@ public class Main : MonoBehaviour
                 break;
             }
             
-            if (enemysLeft == 0)
+            if (enemysLeft == 0) //once all the enemys in this level have been destroyed
             {
                 _numLevel++; //increment level
                 _numEnemy += 10; //make more enemys than previous level
