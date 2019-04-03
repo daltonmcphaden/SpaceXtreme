@@ -10,6 +10,14 @@ TagManager:
   - ProjectileEnemy
   - PowerUp
   - PowerUpBox
+  - Weap1
+  - Weap2
+  - Weap3
+  - Weap4
+  - Weap5
+  - Weap6
+  - Weap7
+  - Weap8
   layers:
   - Default
   - TransparentFX

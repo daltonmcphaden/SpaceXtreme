@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum WeaponType // Enum definition for all the weapons
 {
-    none, blaster, spread, phaser, missile, laser, shield
+    none, blaster, spread, spray, missile, laser, shield
 }
 
 [System.Serializable]
@@ -28,6 +28,7 @@ public class Weapon : MonoBehaviour
     public GameObject collar;
     public float lastShotTime;
     private Renderer _collarRend;
+
 
     // Start is called before the first frame update
     void Start()
@@ -115,6 +116,41 @@ public class Weapon : MonoBehaviour
                 p.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
                 p.rigid.velocity = p.transform.rotation * vel;
                 break;
+
+            case WeaponType.spray:               
+
+               p = MakeProjectile();
+               p.rigid.velocity = vel; //straight up
+
+               p = MakeProjectile();
+               p.transform.rotation = Quaternion.AngleAxis(45, Vector3.back); 
+               p.rigid.velocity = p.transform.rotation * vel; //left 45 deg
+
+               p = MakeProjectile();
+               p.transform.rotation = Quaternion.AngleAxis(90, Vector3.back); 
+               p.rigid.velocity = p.transform.rotation * vel; //left 90 deg
+
+               p = MakeProjectile();
+               p.transform.rotation = Quaternion.AngleAxis(135, Vector3.back); 
+               p.rigid.velocity = p.transform.rotation * vel; //left 135 deg 
+
+               p = MakeProjectile();
+               p.transform.rotation = Quaternion.AngleAxis(180, Vector3.back); 
+               p.rigid.velocity = p.transform.rotation * vel; // 180 deg
+
+               p = MakeProjectile();
+               p.transform.rotation = Quaternion.AngleAxis(-135, Vector3.back); 
+               p.rigid.velocity = p.transform.rotation * vel; //right 135 deg
+
+               p = MakeProjectile();
+               p.transform.rotation = Quaternion.AngleAxis(-90, Vector3.back); 
+               p.rigid.velocity = p.transform.rotation * vel; //right 90 deg
+
+               p = MakeProjectile();
+               p.transform.rotation = Quaternion.AngleAxis(-45, Vector3.back); 
+               p.rigid.velocity = p.transform.rotation * vel; //right 45 deg
+
+                break;
         }
     }
     public Projectile MakeProjectile()
@@ -137,4 +173,5 @@ public class Weapon : MonoBehaviour
         lastShotTime = Time.time; //sets last shot time to time projectile was shot
         return p; //returns the pointer variable
     }
+    
 }
