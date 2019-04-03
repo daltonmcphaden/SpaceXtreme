@@ -24,9 +24,9 @@ public class Enemy_1 : Enemy
         //this block senses if the enemy started on the left and right, and moves it in the correct corresponding x direction
         Vector3 tempPos = pos;
         if(_x0 > 0)
-        tempPos.x -= Speed + Time.deltaTime;
+        tempPos.x -= speed + Time.deltaTime;
         if (_x0 < 0)
-        tempPos.x += Speed + Time.deltaTime;
+        tempPos.x += speed + Time.deltaTime;
 
         pos = tempPos;
 
@@ -38,6 +38,7 @@ public class Enemy_1 : Enemy
         {
             if (pos.y < bndCheck.camHeight - bndCheck.radius)
             {
+                Main.enemysLeft--;
                 Destroy(gameObject);
             }
         }

@@ -74,6 +74,7 @@ public class Hero : MonoBehaviour
 
         if (go.tag == "Enemy"){     // If the shield was triggered by an enemy
             shieldLevel--;
+            Main.enemysLeft--;
             Destroy(go);
         } 
 
@@ -122,7 +123,7 @@ public class Hero : MonoBehaviour
             if (value < 0) {
                 Destroy(this.gameObject);
                 // Tell Main.S to restart the game after a delay
-                Main.S.DelayedRestart(gameRestartDelay);
+                Main.S.GameOver();
             }
         }
     }

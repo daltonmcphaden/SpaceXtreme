@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float        Speed = 0.1f; //base enemy move speed
+    public float        speed = 0.1f; //base enemy move speed
     public float        fireRate = 0.3f; //fire rate to be implemented when the enemies start shooting
     public float        health; // base enemy moves slowly and down in a straight line, requires 5 hits
     public int          score; //score gained for destroying enemies
@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
         Move(); // calls virtual move function
 
         if (bndCheck != null && bndCheck.offDown) { // bounds check that destroys object if off screen
+            Main.enemysLeft--;
             Destroy(gameObject);
         }
     }
@@ -38,7 +39,7 @@ public class Enemy : MonoBehaviour
     // Moves enemies in the Y direction
     public virtual void Move() {
         Vector3 tempPos = pos;
-        tempPos.y -= Speed + Time.deltaTime;
+        tempPos.y -= speed + Time.deltaTime;
         pos = tempPos;
     }
     private void OnCollisionEnter(Collision collision) 
@@ -64,6 +65,7 @@ public class Enemy : MonoBehaviour
                     Main.S.ShipDestroyed(this);             // Tell the main singleton that this ship was destroyed
                     this.gameObject.SetActive(false);
                     Destroy(this.gameObject); //Destroy this enemy
+                    Main.enemysLeft--; //decrement how many enemys are left on this level
                     Score.AddScore(this.score);
                 }
                 //set projectile to inactive to remove bounce effect from the collision

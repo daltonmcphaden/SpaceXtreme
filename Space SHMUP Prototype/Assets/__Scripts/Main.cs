@@ -17,10 +17,13 @@ public class Main : MonoBehaviour
     public GameObject           prefabPowerUp;      // this will hold the prefab for all powerups
     public WeaponType[]         powerUpFrequency = new WeaponType [] {WeaponType.blaster, WeaponType.blaster, 
                                                                         WeaponType.spread, WeaponType.shield };     // Frequency of each powerup
+    private float _numEnemy = 10, _numLevel = 1; //number of enemys spawned and level number
+    private int _enemyClasses = 3; //how many different enemy types there are
+    static public float enemysLeft = 10; //how many enemys are left
 
-    public Text currScoreText; // Current Score
-    public Text highScoreText; // High Score
-    
+    public Text currScoreText, highScoreText, restartText, gameOverText, levelText; // all UI text
+    private bool _gameOver = false, _restart = false, allSpawned = false;
+
     private BoundsCheck _bndCheck; // Bounds Check Object
 
     public void ShipDestroyed( Enemy e ) {      // Called by an enemy ship each time one is destroyed
@@ -45,7 +48,8 @@ public class Main : MonoBehaviour
     {
         S = this;
         _bndCheck = GetComponent<BoundsCheck>();
-        Invoke("SpawnEnemy", 1f/enemySpawnPerSecond); // Creates enemy objects from the prefabs
+
+        StartCoroutine(SpawnEnemy()); // Creates enemy objects from the prefabs
 
         //dictionary with weapontype as the key
         WEAP_DICT = new Dictionary<WeaponType, WeaponDefinition>();
@@ -68,51 +72,96 @@ public class Main : MonoBehaviour
         highScoreText.text = "High Score: " + Score.highScore.ToString();
     }
 
-    void Update() // update high score text box method
+    void Update() 
     {
         SetCurrentScore();
+
+        if (_restart) //if restart is true and r has been pressed restart the game
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                DelayedRestart(2f);
+            }
+        }
     }
 
-    public void SpawnEnemy() //spawns enemies
+    public IEnumerator SpawnEnemy() //spawns enemies
     {
-        // The enemy to be spawned is randomly selected from the array containing each type of enemy
-        int ndx = Random.Range(0, prefabEnemies.Length);
-        GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]); //instantiates enemy prefabs
+        yield return new WaitForSeconds(2); //2 second before game starts 
 
-        float enemyPadding = enemyDefaultPadding;
-        if (go.GetComponent<BoundsCheck>() != null)
+        while (true)//loop that makes waves of enemys spawn infinitly to make constant levels until hero ship is destroyed
         {
-            enemyPadding = Mathf.Abs(go.GetComponent<BoundsCheck>().radius);
-        }
-        
-        Vector3 pos = Vector3.zero; 
-        // min and max x spawn components
-        float xMin = -_bndCheck.camWidth + enemyPadding;
-        float xMax = _bndCheck.camWidth - enemyPadding;    
-        
-        // Enemy_1 will spawn from the corners
-        if (ndx == 1)
-        {
-           int p = Random.Range(0,2); //randomly selects either the left or right
-           if (p==0)
-           {
-               pos.x = xMin;
-           }
-           else
-           {
-               pos.x = xMax;
-           }
-        }
-        // Other enemies spawn anywhere across the top of the screen
-        else
-        {
-            pos.x = Random.Range(xMin,xMax);
-        }
-        
-        pos.y = _bndCheck.camHeight + enemyPadding;
-        go.transform.position = pos;
+            levelText.text = "Level " + _numLevel;//text that tells you what level your on
 
-        Invoke("SpawnEnemy", 1f/enemySpawnPerSecond);
+            if (!allSpawned)//makes sure the for loop only runs once per level
+            {
+                for (int i = 0; i < _numEnemy; i++)
+                {
+                    // The enemy to be spawned is randomly selected from the array containing each type of enemy
+                    int ndx = Random.Range(0, _enemyClasses);
+                    GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]); //instantiates enemy prefabs
+
+                    float enemyPadding = enemyDefaultPadding;
+                    if (go.GetComponent<BoundsCheck>() != null)
+                    {
+                        enemyPadding = Mathf.Abs(go.GetComponent<BoundsCheck>().radius);
+                    }
+
+                    Vector3 pos = Vector3.zero;
+                    // min and max x spawn components
+                    float xMin = -_bndCheck.camWidth + enemyPadding;
+                    float xMax = _bndCheck.camWidth - enemyPadding;
+
+                    // Enemy_1 will spawn from the corners
+                    if (ndx == 1)
+                    {
+                        int p = Random.Range(0, 2); //randomly selects either the left or right
+                        if (p == 0)
+                        {
+                            pos.x = xMin;
+                        }
+                        else
+                        {
+                            pos.x = xMax;
+                        }
+                    }
+                    // Other enemies spawn anywhere across the top of the screen
+                    else
+                    {
+                        pos.x = Random.Range(xMin, xMax);
+                    }
+
+                    pos.y = _bndCheck.camHeight + enemyPadding;
+                    go.transform.position = pos;
+
+                    yield return new WaitForSeconds(1f / enemySpawnPerSecond);//wait between spawning enemys
+                }
+
+                if (_numLevel== 2)//add another class of enemys for level 2
+                {
+                    _enemyClasses++;
+                }
+
+                allSpawned = true; //all enemys have been spawned
+            }
+
+            if (_gameOver) // if the hero ship dies this will break the spawn loop and desplay restart text
+            {
+                restartText.text = "Press 'R' For Restart";
+                _restart = true;
+                break;
+            }
+            
+            if (enemysLeft == 0)
+            {
+                _numLevel++; //increment level
+                _numEnemy += 10; //make more enemys than previous level
+                enemysLeft = _numEnemy; //reset enemys left
+                allSpawned = false; //alow another wave to be spawned
+                yield return new WaitForSeconds(3); //wait 3 seconds before next wave
+            }
+            yield return new WaitForSeconds(0.1f);//wait stops infinite loop from crashing game
+        }
     }
 
     public void DelayedRestart(float delay) {
@@ -136,5 +185,11 @@ public class Main : MonoBehaviour
         }
 
         return new WeaponDefinition();
+    }
+
+    public void GameOver() // when game is over it will display text
+    {
+        gameOverText.text = "Game Over";
+        _gameOver = true;
     }
 }
