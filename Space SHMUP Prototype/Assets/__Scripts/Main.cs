@@ -15,14 +15,14 @@ public class Main : MonoBehaviour
     public float                enemyDefaultPadding = 1.5f;
     public WeaponDefinition[]   weaponDefinitions; // Weapon Definition Array
     public GameObject           prefabPowerUp;      // this will hold the prefab for all powerups
-    public WeaponType[]         powerUpFrequency = new WeaponType [] {WeaponType.blaster, WeaponType.blaster, 
-                                                                        WeaponType.spread, WeaponType.shield };     // Frequency of each powerup
+    
     private float _numEnemy = 10, _numLevel = 1; //number of enemys spawned and level number
     private int _enemyClasses = 3; //how many different enemy types there are
     static public float enemysLeft = 10; //how many enemys are left
 
     public Text currScoreText, highScoreText, restartText, gameOverText, levelText; // all UI text
     private bool _gameOver = false, _restart = false, allSpawned = false;
+    public WeaponType[]         powerUpFrequency = new WeaponType [] {WeaponType.blaster, WeaponType.blaster, WeaponType.spread, WeaponType.shield, WeaponType.spray, WeaponType.spray};     // Frequency of each powerup
 
     private BoundsCheck _bndCheck; // Bounds Check Object
 
@@ -31,7 +31,9 @@ public class Main : MonoBehaviour
         if (Random.value <= e.powerUpDropChance) {      // Random value between 0 and 1 generated, each ship has its own drop chance
             // Choose which powerup to pick
             // Pick one from the possibilities in powerUpFrequency
-            int ndx = Random.Range(0, powerUpFrequency.Length);         // picks a random value in the range
+            int ndx = Random.Range(0, powerUpFrequency.Length);    // picks a random value in the range
+            
+            Debug.Log(powerUpFrequency.Length);
             WeaponType puType = powerUpFrequency[ndx];
             // Spawn a powerup
             GameObject go = Instantiate(prefabPowerUp) as GameObject;
@@ -188,6 +190,7 @@ public class Main : MonoBehaviour
     {
         if (WEAP_DICT.ContainsKey(weaponType))
         {
+           // Debug.Log(WEAP_DICT[weaponType]);
             return WEAP_DICT[weaponType];
         }
 

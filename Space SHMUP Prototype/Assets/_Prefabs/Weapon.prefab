@@ -122,9 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f94ffd5ea0baf9408f157cf1401cce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
+  _type: 3
   def:
-    type: 0
+    type: 3
     letter: 
     color: {r: 1, g: 1, b: 1, a: 1}
     projectilePrefab: {fileID: 0}
