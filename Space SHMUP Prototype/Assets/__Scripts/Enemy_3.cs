@@ -64,7 +64,7 @@ public class Enemy_3 : Enemy
             Main.enemysLeft--;
         }
     }
-
+    //this function creates the tracking effect of the asteroid
     public override void Move()
     {
         Vector3 direction = target.position - rBody.position; //direction asteroid needs to move in

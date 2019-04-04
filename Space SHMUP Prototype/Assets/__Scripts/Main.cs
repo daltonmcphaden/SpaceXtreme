@@ -22,7 +22,7 @@ public class Main : MonoBehaviour
 
     public Text currScoreText, highScoreText, restartText, gameOverText, levelText; // all UI text
     private bool _gameOver = false, _restart = false, allSpawned = false;
-    public WeaponType[]         powerUpFrequency = new WeaponType [] {WeaponType.blaster, WeaponType.blaster, WeaponType.spread, WeaponType.shield, WeaponType.spray, WeaponType.spray};     // Frequency of each powerup
+    public WeaponType[]         powerUpFrequency = new WeaponType [] {WeaponType.blaster, WeaponType.blaster, WeaponType.spread, WeaponType.shield, WeaponType.spray, WeaponType.spray, WeaponType.missile};     // Frequency of each powerup
 
     private BoundsCheck _bndCheck; // Bounds Check Object
 
@@ -81,7 +81,7 @@ public class Main : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                DelayedRestart(2f);
+                DelayedRestart(1f);
             }
         }
     }

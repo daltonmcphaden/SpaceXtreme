@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum WeaponType // Enum definition for all the weapons
 {
-    none, blaster, spread, spray, missile, laser, shield
+    none, blaster, spread, spray, missile, shield
 }
 
 [System.Serializable]
@@ -15,7 +15,8 @@ public class WeaponDefinition
     public Color color = Color.white; //color of collar & power up
     public GameObject projectilePrefab; // projectile game object
     public Color projectileColor; //base projectile is white
-    public float damageOnHit, continousDamage, delayBetweenShots, velocity; //weapon fire properties damage, delay, velocity of projectile
+    public float damageOnHit, delayBetweenShots, velocity; //weapon fire properties damage, delay, velocity of projectile
+    public float force, rotationForce; //forces for homing missile
 }
 public class Weapon : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class Weapon : MonoBehaviour
     public GameObject collar;
     public float lastShotTime;
     private Renderer _collarRend;
+
 
 
     // Start is called before the first frame update
@@ -120,8 +122,8 @@ public class Weapon : MonoBehaviour
                 p.rigid.velocity = p.transform.rotation * vel;
                 break;
 
-            case WeaponType.spray:               
-
+            case WeaponType.spray:
+               
                p = MakeProjectile();
                p.rigid.velocity = vel; //straight up
 
@@ -152,10 +154,16 @@ public class Weapon : MonoBehaviour
                p = MakeProjectile();
                p.transform.rotation = Quaternion.AngleAxis(-45, Vector3.back); 
                p.rigid.velocity = p.transform.rotation * vel; //right 45 deg
+               break;
+
+            case WeaponType.missile:
+
+           
 
                 break;
         }
     }
+
     public Projectile MakeProjectile()
     {
         GameObject gameObj = Instantiate<GameObject>(def.projectilePrefab); //makes projectile object from the prefab
