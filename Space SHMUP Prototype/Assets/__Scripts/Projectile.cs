@@ -38,7 +38,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_bndCheck.offUp)
+        if (!_bndCheck.isOnScreen)
             Destroy(gameObject);
     }
 
@@ -47,7 +47,6 @@ public class Projectile : MonoBehaviour
     {
         _type = eType;
         WeaponDefinition def = Main.GetWeaponDefinition(_type);
-        //Debug.Log(eType);
         _rend.material.color = def.projectileColor;
     }
 }

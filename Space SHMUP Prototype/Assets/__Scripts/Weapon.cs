@@ -14,8 +14,8 @@ public class WeaponDefinition
     public string letter; //letter to show on the powerup
     public Color color = Color.white; //color of collar & power up
     public GameObject projectilePrefab; // projectile game object
-    public Color projectileColor = Color.white; //base projectile is white
-    public float damageOnHit = 2, continousDamage = 0, delayBetweenShots = 0, velocity = 20; //weapon fire properties damage, delay, velocity of projectile
+    public Color projectileColor; //base projectile is white
+    public float damageOnHit, continousDamage, delayBetweenShots, velocity; //weapon fire properties damage, delay, velocity of projectile
 }
 public class Weapon : MonoBehaviour
 {
@@ -75,6 +75,9 @@ public class Weapon : MonoBehaviour
 
         def = Main.GetWeaponDefinition(_type);
         _collarRend.material.color = def.color; // sets collar colour depending on weapon in use
+        if (type == WeaponType.spray){
+            _collarRend.material.color = Color.cyan;
+        }
         lastShotTime = 0; 
     }
 

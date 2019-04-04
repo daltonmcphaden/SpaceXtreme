@@ -33,7 +33,6 @@ public class Main : MonoBehaviour
             // Pick one from the possibilities in powerUpFrequency
             int ndx = Random.Range(0, powerUpFrequency.Length);    // picks a random value in the range
             
-            Debug.Log(powerUpFrequency.Length);
             WeaponType puType = powerUpFrequency[ndx];
             // Spawn a powerup
             GameObject go = Instantiate(prefabPowerUp) as GameObject;
@@ -190,7 +189,6 @@ public class Main : MonoBehaviour
     {
         if (WEAP_DICT.ContainsKey(weaponType))
         {
-           // Debug.Log(WEAP_DICT[weaponType]);
             return WEAP_DICT[weaponType];
         }
 
