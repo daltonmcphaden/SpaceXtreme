@@ -29,6 +29,8 @@ public class Hero : MonoBehaviour
     public delegate void WeaponFireDelegate();
     //create weaponfiredeligate field
     public WeaponFireDelegate fireDelegate;
+    public AudioClip puGet;
+    public AudioSource aSource;
 
     private void Awake()
     {
@@ -104,6 +106,8 @@ public class Hero : MonoBehaviour
     }
 
     public void AbsorbPowerUp( GameObject go ) {
+
+        aSource.PlayOneShot(puGet);
         PowerUp pu = go.GetComponent<PowerUp>();
         int level = 1;
         switch (pu.type) {

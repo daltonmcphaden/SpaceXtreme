@@ -27,6 +27,9 @@ public class Main : MonoBehaviour
 
     private BoundsCheck _bndCheck; // Bounds Check Object
 
+    public AudioClip newlvl;
+    public AudioSource ausSource;
+
     public void ShipDestroyed( Enemy e ) {      // Called by an enemy ship each time one is destroyed
         // Potentially generate a powerup
         if (Random.value <= powerUpDropChance) {      // Random value between 0 and 1 generated, each ship has its own drop chance
@@ -94,9 +97,11 @@ public class Main : MonoBehaviour
         while (true)//loop that makes waves of enemys spawn infinitly to make constant levels until hero ship is destroyed
         {
             levelText.text = "Level " + _numLevel;//text that tells you what level your on
+            
 
             if (!allSpawned)//makes sure the for loop only runs once per level
             {
+                ausSource.PlayOneShot(newlvl);
                 for (int i = 0; i < _numEnemy; i++)
                 {
                     // The enemy to be spawned is randomly selected from the array containing each type of enemy
