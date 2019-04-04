@@ -12,9 +12,8 @@ public class WeaponDefinition
 {
     public WeaponType type = WeaponType.none;
     public string letter; //letter to show on the powerup
-    public Color color = Color.white; //color of collar & power up
+    public Color color; // Weapon and its projectile color
     public GameObject projectilePrefab; // projectile game object
-    public Color projectileColor; //base projectile is white
     public float damageOnHit, continousDamage, delayBetweenShots, velocity; //weapon fire properties damage, delay, velocity of projectile
 }
 public class Weapon : MonoBehaviour
@@ -26,15 +25,19 @@ public class Weapon : MonoBehaviour
     private WeaponType _type = WeaponType.none;
     public WeaponDefinition def;
     public GameObject collar;
+    public GameObject gun;
     public float lastShotTime;
     private Renderer _collarRend;
+    private Renderer _gunColor;
 
 
     // Start is called before the first frame update
     void Start()
     {
         collar = transform.Find("Collar").gameObject;
+        gun = transform.Find("Barrel").gameObject;
         _collarRend = collar.GetComponent<Renderer>();
+        _gunColor = gun.GetComponent<Renderer>();
 
         //set the default type
         SetType(_type);
@@ -75,9 +78,7 @@ public class Weapon : MonoBehaviour
 
         def = Main.GetWeaponDefinition(_type);
         _collarRend.material.color = def.color; // sets collar colour depending on weapon in use
-        if (type == WeaponType.spray){
-            _collarRend.material.color = Color.cyan;
-        }
+        _gunColor.material.color = def.color;   // Set gun color depending on weapon in use
         lastShotTime = 0; 
     }
 
@@ -106,7 +107,6 @@ public class Weapon : MonoBehaviour
                 break;
 
             case WeaponType.spread:
-             
                 //right projectile
                 p = MakeProjectile();
                 p.transform.rotation = Quaternion.AngleAxis(30, Vector3.back); 
@@ -122,36 +122,9 @@ public class Weapon : MonoBehaviour
 
             case WeaponType.spray:               
 
-               p = MakeProjectile();
-               p.rigid.velocity = vel; //straight up
-
-               p = MakeProjectile();
-               p.transform.rotation = Quaternion.AngleAxis(45, Vector3.back); 
-               p.rigid.velocity = p.transform.rotation * vel; //left 45 deg
-
-               p = MakeProjectile();
-               p.transform.rotation = Quaternion.AngleAxis(90, Vector3.back); 
-               p.rigid.velocity = p.transform.rotation * vel; //left 90 deg
-
-               p = MakeProjectile();
-               p.transform.rotation = Quaternion.AngleAxis(135, Vector3.back); 
-               p.rigid.velocity = p.transform.rotation * vel; //left 135 deg 
-
-               p = MakeProjectile();
-               p.transform.rotation = Quaternion.AngleAxis(180, Vector3.back); 
-               p.rigid.velocity = p.transform.rotation * vel; // 180 deg
-
-               p = MakeProjectile();
-               p.transform.rotation = Quaternion.AngleAxis(-135, Vector3.back); 
-               p.rigid.velocity = p.transform.rotation * vel; //right 135 deg
-
-               p = MakeProjectile();
-               p.transform.rotation = Quaternion.AngleAxis(-90, Vector3.back); 
-               p.rigid.velocity = p.transform.rotation * vel; //right 90 deg
-
-               p = MakeProjectile();
-               p.transform.rotation = Quaternion.AngleAxis(-45, Vector3.back); 
-               p.rigid.velocity = p.transform.rotation * vel; //right 45 deg
+                p = MakeProjectile();
+                p.transform.rotation = gun.transform.rotation;      // Bullets fire in the direction that the gun is pointed in
+                p.rigid.velocity = gun.transform.rotation*vel;      
 
                 break;
         }

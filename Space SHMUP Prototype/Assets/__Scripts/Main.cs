@@ -22,13 +22,14 @@ public class Main : MonoBehaviour
 
     public Text currScoreText, highScoreText, restartText, gameOverText, levelText; // all UI text
     private bool _gameOver = false, _restart = false, allSpawned = false;
-    public WeaponType[]         powerUpFrequency = new WeaponType [] {WeaponType.blaster, WeaponType.blaster, WeaponType.spread, WeaponType.shield, WeaponType.spray, WeaponType.spray};     // Frequency of each powerup
+    public WeaponType[] powerUpFrequency;   // Frequency of each powerup
+    public float powerUpDropChance;
 
     private BoundsCheck _bndCheck; // Bounds Check Object
 
     public void ShipDestroyed( Enemy e ) {      // Called by an enemy ship each time one is destroyed
         // Potentially generate a powerup
-        if (Random.value <= e.powerUpDropChance) {      // Random value between 0 and 1 generated, each ship has its own drop chance
+        if (Random.value <= powerUpDropChance) {      // Random value between 0 and 1 generated, each ship has its own drop chance
             // Choose which powerup to pick
             // Pick one from the possibilities in powerUpFrequency
             int ndx = Random.Range(0, powerUpFrequency.Length);    // picks a random value in the range

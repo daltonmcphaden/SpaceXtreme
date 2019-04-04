@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
     public float        fireRate = 0.3f; //fire rate to be implemented when the enemies start shooting
     public float        health; // base enemy moves slowly and down in a straight line, requires 5 hits
     public int          score; //score gained for destroying enemies
-    public float        powerUpDropChance = 0.5f;     // Chance it will drop a powerup when destroyed
 
     protected BoundsCheck bndCheck; //bounds check variable
 

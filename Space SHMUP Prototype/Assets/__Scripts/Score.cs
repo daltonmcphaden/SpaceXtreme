@@ -13,5 +13,5 @@ public class Score : MonoBehaviour
         score += newScoreValue;
     }
     
-
+    
 }

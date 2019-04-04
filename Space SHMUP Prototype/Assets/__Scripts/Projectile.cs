@@ -47,6 +47,6 @@ public class Projectile : MonoBehaviour
     {
         _type = eType;
         WeaponDefinition def = Main.GetWeaponDefinition(_type);
-        _rend.material.color = def.projectileColor;
+        _rend.material.color = def.color;
     }
 }
