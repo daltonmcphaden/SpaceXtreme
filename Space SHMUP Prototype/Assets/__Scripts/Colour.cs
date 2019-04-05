@@ -11,6 +11,11 @@ public class Colour : MonoBehaviour
         shipMat.color = Color.white;
     }
 
+    public void MakeWhite()
+    {
+        shipMat.color = Color.white;
+    }
+
     public void MakeGreen()
     {
         shipMat.color = Color.green;
