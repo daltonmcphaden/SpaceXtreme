@@ -194,27 +194,29 @@ public class Weapon : MonoBehaviour
         if (def.target == null || m == null)  //make sure theres a target
             return;
         
-        Vector3 direction = def.target.position - m.rigid.position; //direction asteroid needs to move in
+        Vector3 direction = def.target.position - m.rigid.position; //direction projectile needs to move in
         direction.Normalize(); // normalises vector to give it a length of 1
-        Vector3 rotationAmount = Vector3.Cross(direction, m.transform.up); //amount rock needs to rotate to head towards ship
-        m.rigid.angularVelocity = rotationAmount * def.rotationForce; //how quickly the asteroid can change direction
+        Vector3 rotationAmount = Vector3.Cross(m.transform.up, direction); //amount projectile needs to rotate to track enemy
+        m.rigid.angularVelocity = rotationAmount * def.rotationForce; //how quickly the  projectile can change direction
         m.rigid.velocity = m.transform.up * def.force; //how fast it moves
         
     }
+    //function that gets the closest enemy to the ship it takes the current list of enemys as its parameter
     Transform GetClosestEnemy(List<GameObject> enemies)
     {
         Transform closestTarget = null;
-        float closestDistance = Mathf.Infinity;
-        Vector3 currentPosition = Main.S.transform.position;
-        foreach (GameObject potentialTarget in enemies)
-        {
-            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
-            float targetDist = directionToTarget.sqrMagnitude;
+        float closestDistance = Mathf.Infinity; //set closest distance to infinity so it can be compared to smallet distances
+        Vector3 currentPosition = Main.S.transform.position; //current position of hero ship
 
-            if (targetDist < closestDistance)
+        foreach (GameObject potentialTarget in enemies) //looks at each potential enemy in the enemy list
+        {
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition; //get the direction towards the target
+            float targetDist = directionToTarget.sqrMagnitude; // the distance to the target
+
+            if (targetDist < closestDistance) //compare the closest distance found so far to the current target distance
             {
-                closestDistance = targetDist;
-                closestTarget = potentialTarget.transform;
+                closestDistance = targetDist; //if a closer distance is found it sets it to the new closest distance
+                closestTarget = potentialTarget.transform; //and it sets the closest target
             }
         }
         return closestTarget;
