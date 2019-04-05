@@ -172,7 +172,10 @@ public class Main : MonoBehaviour
                 _numEnemy += 10; //make more enemys than previous level
                 enemysLeft = _numEnemy; //reset enemys left
                 allSpawned = false; //alow another wave to be spawned
+
                 yield return new WaitForSeconds(3); //wait 3 seconds before next wave
+
+                Hero.S.ResetWeaponLevels();     // Reset all weapon levels back to zero
             }
             yield return new WaitForSeconds(0.1f);//wait stops infinite loop from crashing game
         }

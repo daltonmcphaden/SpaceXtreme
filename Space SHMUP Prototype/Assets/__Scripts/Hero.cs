@@ -17,7 +17,7 @@ public class Hero : MonoBehaviour
 
     public Text [] weaponHUD;
     private WeaponType _currentWeaponType;      // Keeps track of the current weapon type in use
-    private int [] _weaponLevels = { 1, 1, 1, 1 };
+    public int [] _weaponLevels = { 1, 1, 1, 1 };
 
     [Header("Set Dynamically")]
     [SerializeField]
@@ -117,24 +117,33 @@ public class Hero : MonoBehaviour
                 break;
 
             case WeaponType.blaster:
-                level = ++_weaponLevels[0];
-                SetBlasterText();
+                if (_weaponLevels[0] < 3){
+                    level = ++_weaponLevels[0];
+                    SetBlasterText();
+                }
                 break;
-
+                
             case WeaponType.spread:
-                level = ++_weaponLevels[1];
-                SetSpreadText();
+                if (_weaponLevels[1] < 3){
+                    level = ++_weaponLevels[1];
+                    SetSpreadText();
+                }
                 break;
 
             case WeaponType.spray:
-                level = ++_weaponLevels[2];
-                SetSprayText();
+                if (_weaponLevels[2] < 3){
+                    level = ++_weaponLevels[2];
+                    SetSprayText();
+                }
                 break;
             
-            // case WeaponType.missile:
-            //     level = ++_weaponLevels[3];
-            //      SetMissileText();
-            //     break;
+            case WeaponType.missile:
+                if (_weaponLevels[3] < 3){
+                    level = ++_weaponLevels[3];
+                    SetMissileText();
+                }
+                
+                break;
 
         }
 
@@ -160,7 +169,6 @@ public class Hero : MonoBehaviour
             }
         }
     }
-
 
     void ClearWeapons() {
         foreach (Weapon w in weapons) {
@@ -304,5 +312,14 @@ public class Hero : MonoBehaviour
         }
     }
 
+    public void ResetWeaponLevels(){
+        for (int i = 0; i < _weaponLevels.Length; i++ ){
+            _weaponLevels[i] = 1;
+        }
+        SetBlasterText();
+        SetSpreadText();
+        SetSprayText();
+        SetMissileText();
+    }
 
 }
