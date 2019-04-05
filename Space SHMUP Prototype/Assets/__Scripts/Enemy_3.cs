@@ -54,12 +54,14 @@ public class Enemy_3 : Enemy
         {
             if (pos.y < bndCheck.camHeight - bndCheck.radius)
             {
+                Main.enemyList.Remove(gameObject);//remove from enemy list
                 Destroy(gameObject);
                 Main.enemysLeft--;
             }
         }
         if (bndCheck.offLeft || bndCheck.offRight) //this enemy should never go off the screen to the left or right
         {
+            Main.enemyList.Remove(gameObject);//remove from enemy list
             Destroy(gameObject);
             Main.enemysLeft--;
         }

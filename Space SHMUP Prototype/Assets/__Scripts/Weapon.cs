@@ -15,6 +15,8 @@ public class WeaponDefinition
     public Color color; // Weapon and its projectile color
     public GameObject projectilePrefab; // projectile game object
     public float damageOnHit, continousDamage, delayBetweenShots, velocity; //weapon fire properties damage, delay, velocity of projectile
+    public Transform target;
+    public float force, rotationForce;
 }
 public class Weapon : MonoBehaviour
 {
@@ -32,7 +34,7 @@ public class Weapon : MonoBehaviour
     public AudioSource ausource;
     public AudioClip fire;
     public static float _vol = 0.8f;
-    
+    public Projectile m; //missile decliration
 
 
     // Start is called before the first frame update
@@ -174,7 +176,36 @@ public class Weapon : MonoBehaviour
                 Destroy(p.gameObject, 0.2f); 
                 ausource.PlayOneShot(fire,0.1f);  
                 break;
+
+            case WeaponType.missile:
+
+                m = MakeProjectile();
+                //make sure there is an enemy object
+                if (Main.enemyList.Count != 0)
+                {
+                    //get closest target 
+                    def.target = GetClosestEnemy(Main.enemyList);
+                }
+                break;
         }
+    }
+    Transform GetClosestEnemy(List<GameObject> enemies)
+    {
+        Transform closestTarget = null;
+        float closestDistance = Mathf.Infinity;
+        Vector3 currentPosition = Main.S.transform.position;
+        foreach (GameObject potentialTarget in enemies)
+        {
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
+            float targetDist = directionToTarget.sqrMagnitude;
+
+            if (targetDist < closestDistance)
+            {
+                closestDistance = targetDist;
+                closestTarget = potentialTarget.transform;
+            }
+        }
+        return closestTarget;
     }
     public Projectile MakeProjectile()
     {
