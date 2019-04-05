@@ -29,6 +29,10 @@ public class Weapon : MonoBehaviour
     public float lastShotTime;
     private Renderer _collarRend;
     private Renderer _gunColor;
+    public AudioSource ausource;
+    public AudioClip fire;
+    public static float _vol = 0.8f;
+    
 
 
     // Start is called before the first frame update
@@ -104,6 +108,7 @@ public class Weapon : MonoBehaviour
             case WeaponType.blaster:
                 p = MakeProjectile();
                 p.rigid.velocity = vel;
+                ausource.PlayOneShot(fire,_vol);
                 break;
 
             case WeaponType.spread:
@@ -118,13 +123,15 @@ public class Weapon : MonoBehaviour
                 p = MakeProjectile();
                 p.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
                 p.rigid.velocity = p.transform.rotation * vel;
+                ausource.PlayOneShot(fire, 0.8f);
                 break;
 
             case WeaponType.spray:               
 
                 p = MakeProjectile();
                 p.transform.rotation = gun.transform.rotation;      // Bullets fire in the direction that the gun is pointed in
-                p.rigid.velocity = gun.transform.rotation*vel;      
+                p.rigid.velocity = gun.transform.rotation*vel; 
+                ausource.PlayOneShot(fire,0.1f);     
 
                 break;
         }

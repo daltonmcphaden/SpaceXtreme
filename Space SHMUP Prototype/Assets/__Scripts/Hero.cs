@@ -120,6 +120,10 @@ public class Hero : MonoBehaviour
                 if (_weaponLevels[0] < 3){
                     level = ++_weaponLevels[0];
                     SetBlasterText();
+                    if (level == 2)
+                        Weapon._vol = 0.267f;
+                    if (level == 3)
+                        Weapon._vol = 0.16f;
                 }
                 break;
                 
@@ -320,6 +324,7 @@ public class Hero : MonoBehaviour
         SetSpreadText();
         SetSprayText();
         SetMissileText();
+        Weapon._vol = 0.8f;
     }
 
 }
