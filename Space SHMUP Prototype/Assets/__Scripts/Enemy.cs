@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
 
         if (bndCheck != null && bndCheck.offDown) { // bounds check that destroys object if off screen
             Main.enemysLeft--;
+            Main.enemyList.Remove(gameObject);
             Destroy(gameObject);
         }
     }
@@ -65,6 +66,7 @@ public class Enemy : MonoBehaviour
                     this.gameObject.SetActive(false);
                     Destroy(this.gameObject); //Destroy this enemy
                     Main.enemysLeft--; //decrement how many enemys are left on this level
+                    Main.enemyList.Remove(this.gameObject);//remove from enemy list
                     Score.AddScore(this.score);
                 }
                 //set projectile to inactive to remove bounce effect from the collision

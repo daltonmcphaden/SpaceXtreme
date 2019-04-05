@@ -90,6 +90,7 @@ public class Hero : MonoBehaviour
         if (go.tag == "Enemy"){     // If the shield was triggered by an enemy
             shieldLevel--;
             Main.enemysLeft--;
+            Main.enemyList.Remove(go);//remove from enemys list
             Destroy(go);
         } 
 
@@ -299,6 +300,4 @@ public class Hero : MonoBehaviour
             }
         }
     }
-
-
 }

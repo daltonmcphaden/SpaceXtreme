@@ -127,6 +127,12 @@ public class Weapon : MonoBehaviour
                 p.rigid.velocity = gun.transform.rotation*vel;      
 
                 break;
+
+            case WeaponType.missile:
+                p = MakeProjectile();
+                Missile missile = new Missile();
+                missile.rBody = p.rigid;
+                break;
         }
     }
     public Projectile MakeProjectile()

@@ -15,7 +15,8 @@ public class Main : MonoBehaviour
     public float                enemyDefaultPadding = 1.5f;
     public WeaponDefinition[]   weaponDefinitions; // Weapon Definition Array
     public GameObject           prefabPowerUp;      // this will hold the prefab for all powerups
-    
+    static public List<GameObject> enemyList; //list of active enemys
+
     private float _numEnemy = 10, _numLevel = 1; //number of enemys spawned and level number
     private int _enemyClasses = 3; //how many different enemy types there are
     static public float enemysLeft = 10; //how many enemys are left
@@ -50,6 +51,8 @@ public class Main : MonoBehaviour
     {
         S = this;
         _bndCheck = GetComponent<BoundsCheck>();
+
+        enemyList = new List<GameObject>();//initialise list
 
         StartCoroutine(SpawnEnemy()); // Creates enemy objects from the prefabs
 
@@ -102,6 +105,7 @@ public class Main : MonoBehaviour
                     // The enemy to be spawned is randomly selected from the array containing each type of enemy
                     int ndx = Random.Range(0, _enemyClasses);
                     GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]); //instantiates enemy prefabs
+                    enemyList.Add(go); // add enemy to list
 
                     float enemyPadding = enemyDefaultPadding;
                     if (go.GetComponent<BoundsCheck>() != null)
@@ -163,6 +167,7 @@ public class Main : MonoBehaviour
             
             if (enemysLeft <= 0) //once all the enemys in this level have been destroyed
             {
+                enemyList.Clear();//clear enemy list
                 _numLevel++; //increment level
                 _numEnemy += 10; //make more enemys than previous level
                 enemysLeft = _numEnemy; //reset enemys left

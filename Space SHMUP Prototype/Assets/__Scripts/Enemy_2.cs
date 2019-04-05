@@ -43,6 +43,7 @@ public class Enemy_2 : Enemy
 
         if (u > 1) // destroys the enemy after a specific period of time, which is set to be after 2 movement cycles
         {
+            Main.enemyList.Remove(this.gameObject);
             Destroy(this.gameObject);
             Main.enemysLeft--;
             return;
