@@ -17,7 +17,7 @@ public class Hero : MonoBehaviour
 
     public Text [] weaponHUD;
     private WeaponType _currentWeaponType;      // Keeps track of the current weapon type in use
-    public int [] _weaponLevels = { 1, 1, 1, 1 };
+    public int [] weaponLevels = { 1, 1, 1, 1 };
 
     [Header("Set Dynamically")]
     [SerializeField]
@@ -117,36 +117,39 @@ public class Hero : MonoBehaviour
                 break;
 
             case WeaponType.blaster:
-                if (_weaponLevels[0] < 3){
-                    level = ++_weaponLevels[0];
+                if (weaponLevels[0] < 3) {
+                    ++weaponLevels[0];
                     SetBlasterText();
                     if (level == 2)
                         Weapon._vol = 0.267f;
                     if (level == 3)
                         Weapon._vol = 0.16f;
                 }
+                level = weaponLevels[0];
                 break;
                 
             case WeaponType.spread:
-                if (_weaponLevels[1] < 3){
-                    level = ++_weaponLevels[1];
+                if (weaponLevels[1] < 3){
+                    ++weaponLevels[1];
                     SetSpreadText();
                 }
+                level = weaponLevels[1];
                 break;
 
             case WeaponType.spray:
-                if (_weaponLevels[2] < 3){
-                    level = ++_weaponLevels[2];
+                if (weaponLevels[2] < 3){
+                    ++weaponLevels[2];
                     SetSprayText();
                 }
+                level = weaponLevels[2];
                 break;
             
             case WeaponType.missile:
-                if (_weaponLevels[3] < 3){
-                    level = ++_weaponLevels[3];
+                if (weaponLevels[3] < 3){
+                    ++weaponLevels[3];
                     SetMissileText();
                 }
-                
+                level = weaponLevels[3];
                 break;
 
         }
@@ -205,37 +208,30 @@ public class Hero : MonoBehaviour
 
             case WeaponType.spread:
 
-                switch(level) {
-                    case 1:
-                        weapons[0].SetType(WeaponType.spread);
-                        break;
-                    case 2:
-                        goto case 1;
-                        break;
-                    case 3:
-                        goto case 1;
-                        break;
-                }
+                weapons[0].SetType(WeaponType.spread);
+                
                 break;
 
             case WeaponType.spray:
-
                 switch(level) {
                     case 1:
-                        weapons[0].SetType(WeaponType.spray);
-                        for (int i = 5; i < weapons.Length; i++){
-                            weapons[i].SetType(WeaponType.spray);
-                        }
+                        Main.S.weaponDefinitions[3].delayBetweenShots = 1f;
                         break;
                     case 2:
-                        goto case 1;
-
+                        Main.S.weaponDefinitions[3].delayBetweenShots = 0.6f;
                         break;
                     case 3:
-                        goto case 1;
-
+                        Main.S.weaponDefinitions[3].delayBetweenShots = 0.4f;
                         break;
                 }
+                
+                weapons[0].SetType(WeaponType.spray);
+
+                for (int i = 5; i < weapons.Length; i++){
+                    weapons[i].SetType(WeaponType.spray);
+                }
+                
+                
                 break;
             
             case WeaponType.missile:
@@ -261,28 +257,28 @@ public class Hero : MonoBehaviour
 
             case WeaponType.blaster:
 
-                levelOfNextWeapon = _weaponLevels[1];
+                levelOfNextWeapon = weaponLevels[1];
                 _currentWeaponType = WeaponType.spread;
                 ActivateText(weaponHUD[1]);
                 break;
             
             case WeaponType.spread:
 
-                levelOfNextWeapon = _weaponLevels[2];
+                levelOfNextWeapon = weaponLevels[2];
                 _currentWeaponType = WeaponType.spray;
                 ActivateText(weaponHUD[2]);
                 break;
 
             case WeaponType.spray:
 
-                levelOfNextWeapon = _weaponLevels[0];
+                levelOfNextWeapon = weaponLevels[0];
                 _currentWeaponType = WeaponType.blaster;
                 ActivateText(weaponHUD[0]);
                 break;
             
             // case WeaponType.missile:
 
-            //     levelOfNextWeapon = _weaponLevels[0];
+            //     levelOfNextWeapon = weaponLevels[0];
             //     _currentWeaponType = WeaponType.blaster;
             //     ActivateText(weaponHUD[0]);
             //     break;
@@ -292,39 +288,41 @@ public class Hero : MonoBehaviour
     }
     
     void SetBlasterText(){
-        weaponHUD[0].text = "Blaster " + _weaponLevels[0];
+        weaponHUD[0].text = "Blaster " + new string('I', weaponLevels[0]);
     }
 
     void SetSpreadText() {
-        weaponHUD[1].text = "Spread " + _weaponLevels[1];
+        weaponHUD[1].text = "Spread " + new string('I', weaponLevels[1]);
     }
 
     void SetSprayText() {
-        weaponHUD[2].text = "Spray " + _weaponLevels[2];
+        weaponHUD[2].text = "Spray " + new string('I', weaponLevels[2]);
     }
 
     void SetMissileText() {
-        weaponHUD[3].text = "Missile " + _weaponLevels[3];
+        weaponHUD[3].text = "Missile " + new string('I', weaponLevels[3]);
     }
 
     void ActivateText(Text item) {
-        item.fontStyle = FontStyle.Bold;
+        item.fontStyle = FontStyle.BoldAndItalic;
         foreach (Text t in weaponHUD){
             if (t != item){
-                t.fontStyle = FontStyle.Normal;
+                t.fontStyle = FontStyle.Normal; 
             }
         }
     }
 
     public void ResetWeaponLevels(){
-        for (int i = 0; i < _weaponLevels.Length; i++ ){
-            _weaponLevels[i] = 1;
+        for (int i = 0; i < weaponLevels.Length; i++ ){
+            weaponLevels[i] = 1;
         }
         SetBlasterText();
         SetSpreadText();
         SetSprayText();
         SetMissileText();
+
         Weapon._vol = 0.8f;
+        SetActiveWeapon(_currentWeaponType, 1);
     }
 
 }

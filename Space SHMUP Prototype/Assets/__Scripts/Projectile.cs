@@ -32,7 +32,6 @@ public class Projectile : MonoBehaviour
         _bndCheck = GetComponent<BoundsCheck>();
         _rend = GetComponent<Renderer>();
         rigid = GetComponent<Rigidbody>();
-
     }
 
     // Update is called once per frame
