@@ -128,10 +128,10 @@ public class Hero : MonoBehaviour
                 SetSprayText();
                 break;
             
-            // case WeaponType.missile:
-            //     level = ++_weaponLevels[3];
-            //      SetMissileText();
-            //     break;
+            case WeaponType.missile:
+                level = ++_weaponLevels[3];
+                SetMissileText();
+                break;
 
         }
 
@@ -227,7 +227,7 @@ public class Hero : MonoBehaviour
 
                 switch(level) {
                     case 1:
-                    
+                        weapons[0].SetType(WeaponType.missile);
                         break;
                     case 2:
 
@@ -260,17 +260,17 @@ public class Hero : MonoBehaviour
 
             case WeaponType.spray:
 
-                levelOfNextWeapon = _weaponLevels[0];
+                levelOfNextWeapon = _weaponLevels[3];
                 _currentWeaponType = WeaponType.blaster;
                 ActivateText(weaponHUD[0]);
                 break;
             
-            // case WeaponType.missile:
+            case WeaponType.missile:
 
-            //     levelOfNextWeapon = _weaponLevels[0];
-            //     _currentWeaponType = WeaponType.blaster;
-            //     ActivateText(weaponHUD[0]);
-            //     break;
+                 levelOfNextWeapon = _weaponLevels[0];
+                 _currentWeaponType = WeaponType.missile;
+                 ActivateText(weaponHUD[3]);
+                 break;
         }
 
         SetActiveWeapon(_currentWeaponType, levelOfNextWeapon);

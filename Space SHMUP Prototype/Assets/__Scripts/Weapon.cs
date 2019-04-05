@@ -15,6 +15,8 @@ public class WeaponDefinition
     public Color color; // Weapon and its projectile color
     public GameObject projectilePrefab; // projectile game object
     public float damageOnHit, continousDamage, delayBetweenShots, velocity; //weapon fire properties damage, delay, velocity of projectile
+    public Transform target;
+    public float force, rotationForce;
 }
 public class Weapon : MonoBehaviour
 {
@@ -29,6 +31,8 @@ public class Weapon : MonoBehaviour
     public float lastShotTime;
     private Renderer _collarRend;
     private Renderer _gunColor;
+    public Projectile m; //missile declirations
+    
 
 
     // Start is called before the first frame update
@@ -129,11 +133,45 @@ public class Weapon : MonoBehaviour
                 break;
 
             case WeaponType.missile:
-                p = MakeProjectile();
-                Missile missile = new Missile();
-                missile.rBody = p.rigid;
+
+                m = MakeProjectile();
+                //make sure there is an enemy object
+                if (Main.enemyList.Count != 0)
+                {
+                    //get closest target 
+                    def.target = GetClosestEnemy(Main.enemyList);
+                }
                 break;
         }
+    }
+    private void FixedUpdate()
+    {
+        if (def.target != null && m != null)  //make sure theres a target
+        {
+            Vector3 direction = def.target.position - m.rigid.position; //direction asteroid needs to move in
+            direction.Normalize(); // normalises vector to give it a length of 1
+            Vector3 rotationAmount = Vector3.Cross(transform.up, direction); //amount rock needs to rotate to head towards ship
+            m.rigid.angularVelocity = rotationAmount * def.rotationForce; //how quickly the asteroid can change direction
+            m.rigid.velocity = transform.up * def.force; //how fast it moves
+        }
+    }
+    Transform GetClosestEnemy(List<GameObject> enemies)
+    {
+        Transform closestTarget = null;
+        float closestDistance = Mathf.Infinity;
+        Vector3 currentPosition = Main.S.transform.position;
+        foreach (GameObject potentialTarget in enemies)
+        {
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
+            float targetDist = directionToTarget.sqrMagnitude;
+
+            if (targetDist < closestDistance)
+            {
+                closestDistance = targetDist;
+                closestTarget = potentialTarget.transform;
+            }
+        }
+        return closestTarget;
     }
     public Projectile MakeProjectile()
     {
