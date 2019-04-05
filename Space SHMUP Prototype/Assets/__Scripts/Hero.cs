@@ -239,7 +239,7 @@ public class Hero : MonoBehaviour
 
                 switch(level) {
                     case 1:
-
+                        weapons[12].SetType(WeaponType.missile);
                         break;
                     case 2:
 

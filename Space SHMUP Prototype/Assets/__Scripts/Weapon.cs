@@ -178,16 +178,28 @@ public class Weapon : MonoBehaviour
                 break;
 
             case WeaponType.missile:
-
-                m = MakeProjectile();
+                
                 //make sure there is an enemy object
                 if (Main.enemyList.Count != 0)
                 {
+                    m = MakeProjectile();
                     //get closest target 
                     def.target = GetClosestEnemy(Main.enemyList);
                 }
                 break;
         }
+    }
+    private void FixedUpdate()
+    {
+        if (def.target == null || m == null)  //make sure theres a target
+            return;
+        
+        Vector3 direction = def.target.position - m.rigid.position; //direction asteroid needs to move in
+        direction.Normalize(); // normalises vector to give it a length of 1
+        Vector3 rotationAmount = Vector3.Cross(direction, m.transform.up); //amount rock needs to rotate to head towards ship
+        m.rigid.angularVelocity = rotationAmount * def.rotationForce; //how quickly the asteroid can change direction
+        m.rigid.velocity = m.transform.up * def.force; //how fast it moves
+        
     }
     Transform GetClosestEnemy(List<GameObject> enemies)
     {

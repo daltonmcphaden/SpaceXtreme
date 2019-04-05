@@ -110,6 +110,7 @@ public class Main : MonoBehaviour
                     // The enemy to be spawned is randomly selected from the array containing each type of enemy
                     int ndx = Random.Range(0, _enemyClasses);
                     GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]); //instantiates enemy prefabs
+                    enemyList.Add(go);//add enemy to list
 
                     float enemyPadding = enemyDefaultPadding;
                     if (go.GetComponent<BoundsCheck>() != null)
