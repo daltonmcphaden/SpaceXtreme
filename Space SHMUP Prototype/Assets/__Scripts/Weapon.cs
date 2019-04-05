@@ -107,24 +107,65 @@ public class Weapon : MonoBehaviour
                 break;
 
             case WeaponType.spread:
-                //right projectile
-                p = MakeProjectile();
-                p.transform.rotation = Quaternion.AngleAxis(30, Vector3.back); 
-                p.rigid.velocity = p.transform.rotation * vel;
-                //center projectile
-                p = MakeProjectile();
-                p.rigid.velocity = vel;
-                //left projectile
-                p = MakeProjectile();
-                p.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
-                p.rigid.velocity = p.transform.rotation * vel;
+                switch(Hero.S.weaponLevels[1]) {
+
+                    case 1:
+
+                        // Right projectile
+                        p = MakeProjectile();
+                        p.transform.rotation = Quaternion.AngleAxis(15, Vector3.back); 
+                        p.rigid.velocity = p.transform.rotation * vel;
+
+                        // Center projectile
+                        p = MakeProjectile();
+                        p.rigid.velocity = vel;
+
+                        // Left projectile
+                        p = MakeProjectile();
+                        p.transform.rotation = Quaternion.AngleAxis(-15, Vector3.back);
+                        p.rigid.velocity = p.transform.rotation * vel;
+
+                        break;
+
+                    case 2:
+
+                        // Right projectile
+                        p = MakeProjectile();
+                        p.transform.rotation = Quaternion.AngleAxis(30, Vector3.back); 
+                        p.rigid.velocity = p.transform.rotation * vel;
+
+                        // Left projectile
+                        p = MakeProjectile();
+                        p.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
+                        p.rigid.velocity = p.transform.rotation * vel;
+
+                        goto case 1;
+
+                    case 3:
+
+                        // Right projectile
+                        p = MakeProjectile();
+                        p.transform.rotation = Quaternion.AngleAxis(45, Vector3.back); 
+                        p.rigid.velocity = p.transform.rotation * vel;
+
+                        // Left projectile
+                        p = MakeProjectile();
+                        p.transform.rotation = Quaternion.AngleAxis(-45, Vector3.back);
+                        p.rigid.velocity = p.transform.rotation * vel;
+
+                        goto case 2;
+
+                }
+                
                 break;
 
-            case WeaponType.spray:               
+            case WeaponType.spray:   
 
                 p = MakeProjectile();
                 p.transform.rotation = gun.transform.rotation;      // Bullets fire in the direction that the gun is pointed in
-                p.rigid.velocity = gun.transform.rotation*vel;      
+                p.rigid.velocity = gun.transform.rotation*vel;  
+
+                Destroy(p.gameObject, 0.2f);     // Projectile has a lifetime of 0.2 second
 
                 break;
         }
