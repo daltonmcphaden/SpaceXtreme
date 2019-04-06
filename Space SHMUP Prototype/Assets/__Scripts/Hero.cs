@@ -238,15 +238,18 @@ public class Hero : MonoBehaviour
 
                 switch(level) {
                     case 1:
-                        weapons[12].SetType(WeaponType.missile);
+                        Main.S.weaponDefinitions[4].delayBetweenShots = 1f;
                         break;
                     case 2:
-
+                        Main.S.weaponDefinitions[4].delayBetweenShots = 0.6f;
                         break;
                     case 3:
-
+                        Main.S.weaponDefinitions[4].delayBetweenShots = 0.4f;
                         break;
                 }
+
+                weapons[12].SetType(WeaponType.missile);
+
                 break;
         }
     }

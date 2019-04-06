@@ -6,8 +6,8 @@ public class Enemy : MonoBehaviour
 {
     public float        speed = 0.1f; //base enemy move speed
     public float        fireRate = 0.3f; //fire rate to be implemented when the enemies start shooting
-    //public float health=3; //base health
-    static public float healthBoost; //health boost every level
+    public float health=3; //base health
+    //static public float healthBoost; //health boost every level
     public int          score; //score gained for destroying enemies
 
     protected BoundsCheck bndCheck; //bounds check variable

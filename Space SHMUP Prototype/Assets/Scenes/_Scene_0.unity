@@ -902,7 +902,7 @@ MonoBehaviour:
   restartText: {fileID: 295576374}
   gameOverText: {fileID: 1963404525}
   levelText: {fileID: 1361954085}
-  powerUpFrequency: 010000000200000003000000040000000600000002000000
+  powerUpFrequency: 010000000400000004000000040000000600000002000000
   powerUpDropChance: 0.25
   newlvl: {fileID: 8300000, guid: dff0d053c614a174fbaa3171ceb2ae0f, type: 3}
   ausSource: {fileID: 534669908}
@@ -1327,7 +1327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.54509807, g: 0.39215687, b: 0, a: 1}
+  m_Color: {r: 0.3764706, g: 0.12941177, b: 0.79607844, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

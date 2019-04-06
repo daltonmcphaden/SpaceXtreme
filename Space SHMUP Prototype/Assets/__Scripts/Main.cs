@@ -175,7 +175,7 @@ public class Main : MonoBehaviour
                 enemyList.Clear();//clear enemy list
                 _numLevel++; //increment level
                 _numEnemy += 5; //make more enemys than previous level
-                Enemy.healthBoost = 0.5f;//add extra health next level
+                //Enemy.healthBoost = 0.5f;//add extra health next level
                 allSpawned = false; //alow another wave to be spawned
 
                 yield return new WaitForSeconds(3); //wait 3 seconds before next wave
