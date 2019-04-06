@@ -63,6 +63,7 @@ public class Enemy : MonoBehaviour
                 }
                 health -= Main.GetWeaponDefinition(p.type).damageOnHit;
                 if (health <=0){
+                    Main.PlayExp();
                     Main.S.ShipDestroyed(this);             // Tell the main singleton that this ship was destroyed
                     this.gameObject.SetActive(false);
                     Main.enemyList.Remove(this.gameObject);//remove from enemy list

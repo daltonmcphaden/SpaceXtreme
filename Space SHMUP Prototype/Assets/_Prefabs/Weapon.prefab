@@ -133,11 +133,15 @@ MonoBehaviour:
     continousDamage: 0
     delayBetweenShots: 0
     velocity: 20
+    target: {fileID: 0}
+    force: 0
+    rotationForce: 0
   collar: {fileID: 0}
   gun: {fileID: 0}
   lastShotTime: 0
   ausource: {fileID: 5024312231198045113}
   fire: {fileID: 8300000, guid: 73963f254d439b24b8cc53a7b26c01b2, type: 3}
+  m: {fileID: 0}
 --- !u!82 &5024312231198045113
 AudioSource:
   m_ObjectHideFlags: 0
@@ -150,7 +154,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 73963f254d439b24b8cc53a7b26c01b2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.585
   m_Pitch: 1
   Loop: 0
   Mute: 0

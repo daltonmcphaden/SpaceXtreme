@@ -28,8 +28,10 @@ public class Main : MonoBehaviour
 
     private BoundsCheck _bndCheck; // Bounds Check Object
 
-    public AudioClip newlvl;
+    public AudioClip newlvl, exp;
     public AudioSource ausSource;
+    static public AudioSource expsource;
+    static public AudioClip exp1;
 
     public void ShipDestroyed( Enemy e ) {      // Called by an enemy ship each time one is destroyed
         // Potentially generate a powerup
@@ -54,6 +56,8 @@ public class Main : MonoBehaviour
     {
         S = this;
         _bndCheck = GetComponent<BoundsCheck>();
+        expsource = ausSource;
+        exp1 = exp;
 
         enemyList = new List<GameObject>();//initialise list
 
@@ -213,5 +217,9 @@ public class Main : MonoBehaviour
     {
         gameOverText.text = "Game Over";
         _gameOver = true;
+    }
+    static public void PlayExp()
+    {
+        expsource.PlayOneShot(exp1, 0.25f);
     }
 }

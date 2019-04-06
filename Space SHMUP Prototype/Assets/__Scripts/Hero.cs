@@ -29,7 +29,7 @@ public class Hero : MonoBehaviour
     public delegate void WeaponFireDelegate();
     //create weaponfiredeligate field
     public WeaponFireDelegate fireDelegate;
-    public AudioClip puGet;
+    public AudioClip puGet, swap;
     public AudioSource aSource;
 
     private void Awake()
@@ -74,6 +74,7 @@ public class Hero : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F)){
             CycleCurrentWeapon();
+            aSource.PlayOneShot(swap,0.5f);
         }
         
     }
@@ -120,9 +121,9 @@ public class Hero : MonoBehaviour
                 if (weaponLevels[0] < 3) {
                     ++weaponLevels[0];
                     SetBlasterText();
-                    if (level == 2)
+                    if (weaponLevels[0] == 2)
                         Weapon._vol = 0.267f;
-                    if (level == 3)
+                    if (weaponLevels[0] == 3)
                         Weapon._vol = 0.16f;
                 }
                 level = weaponLevels[0];
