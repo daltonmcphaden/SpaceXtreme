@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy_1 : Enemy
 {
     private float _x0, _y0; //original positions
-    
+
 
    // Start is called before the first frame update
     void Start()
@@ -38,7 +38,6 @@ public class Enemy_1 : Enemy
         {
             if (pos.y < bndCheck.camHeight - bndCheck.radius)
             {
-                Main.enemysLeft--;
                 Main.enemyList.Remove(gameObject);//remove from enemy list
                 Destroy(gameObject);
             }

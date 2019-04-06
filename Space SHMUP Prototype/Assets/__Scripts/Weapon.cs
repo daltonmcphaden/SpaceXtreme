@@ -210,6 +210,10 @@ public class Weapon : MonoBehaviour
 
         foreach (GameObject potentialTarget in enemies) //looks at each potential enemy in the enemy list
         {
+            //check if its null just incase its destroyed while algorythem searches
+            if (potentialTarget == null)
+                continue;
+
             Vector3 directionToTarget = potentialTarget.transform.position - currentPosition; //get the direction towards the target
             float targetDist = directionToTarget.sqrMagnitude; // the distance to the target
 

@@ -19,7 +19,7 @@ public class Main : MonoBehaviour
 
     private float _numEnemy = 10, _numLevel = 1; //number of enemys spawned and level number
     private int _enemyClasses = 3; //how many different enemy types there are
-    static public float enemysLeft = 10; //how many enemys are left
+  
 
     public Text currScoreText, highScoreText, restartText, gameOverText, levelText; // all UI text
     private bool _gameOver = false, _restart = false, allSpawned = false;
@@ -170,12 +170,12 @@ public class Main : MonoBehaviour
                 break;
             }
             
-            if (enemysLeft <= 0) //once all the enemys in this level have been destroyed
+            if (enemyList.Count==0) //once all the enemys in this level have been destroyed
             {
                 enemyList.Clear();//clear enemy list
                 _numLevel++; //increment level
-                _numEnemy += 10; //make more enemys than previous level
-                enemysLeft = _numEnemy; //reset enemys left
+                _numEnemy += 5; //make more enemys than previous level
+                Enemy.healthBoost = 0.5f;//add extra health next level
                 allSpawned = false; //alow another wave to be spawned
 
                 yield return new WaitForSeconds(3); //wait 3 seconds before next wave

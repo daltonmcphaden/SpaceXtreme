@@ -45,7 +45,6 @@ public class Enemy_2 : Enemy
         {
             Main.enemyList.Remove(gameObject);//remove from enemy list
             Destroy(this.gameObject);
-            Main.enemysLeft--;
             return;
         }
         Vector3 p01, p12;

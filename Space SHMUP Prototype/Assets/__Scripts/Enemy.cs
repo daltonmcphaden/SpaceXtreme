@@ -6,7 +6,8 @@ public class Enemy : MonoBehaviour
 {
     public float        speed = 0.1f; //base enemy move speed
     public float        fireRate = 0.3f; //fire rate to be implemented when the enemies start shooting
-    public float        health; // base enemy moves slowly and down in a straight line, requires 5 hits
+    //public float health=3; //base health
+    static public float healthBoost; //health boost every level
     public int          score; //score gained for destroying enemies
 
     protected BoundsCheck bndCheck; //bounds check variable
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
 
     void Awake() {
         bndCheck = GetComponent<BoundsCheck>(); // set boundscheck components
+        //health += healthBoost;
     }
 
     // Update is called once per frame
@@ -30,7 +32,6 @@ public class Enemy : MonoBehaviour
         Move(); // calls virtual move function
 
         if (bndCheck != null && bndCheck.offDown) { // bounds check that destroys object if off screen
-            Main.enemysLeft--;
             Main.enemyList.Remove(gameObject);//remove from enemy list
             Destroy(gameObject);
         }
@@ -66,7 +67,6 @@ public class Enemy : MonoBehaviour
                     this.gameObject.SetActive(false);
                     Main.enemyList.Remove(this.gameObject);//remove from enemy list
                     Destroy(this.gameObject); //Destroy this enemy
-                    Main.enemysLeft--; //decrement how many enemys are left on this level
                     Score.AddScore(this.score);
                 }
                 //set projectile to inactive to remove bounce effect from the collision
@@ -78,5 +78,6 @@ public class Enemy : MonoBehaviour
                 print("Enemy hit by non-{ProjectileHero: " + otherGO.name);
                 break;
         }
+
     }
 }
