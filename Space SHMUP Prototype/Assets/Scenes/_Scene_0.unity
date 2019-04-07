@@ -844,7 +844,7 @@ MonoBehaviour:
       type: 3}
     damageOnHit: 1
     continousDamage: 0
-    delayBetweenShots: 0.2
+    delayBetweenShots: 0.3
     velocity: 50
     target: {fileID: 0}
     force: 0

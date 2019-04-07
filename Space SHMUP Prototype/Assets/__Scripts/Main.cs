@@ -187,6 +187,7 @@ public class Main : MonoBehaviour
                 yield return new WaitForSeconds(3); //wait 3 seconds before next wave
 
                 Hero.S.ResetWeaponLevels();     // Reset all weapon levels back to zero
+                Hero.S.shieldLevel = 4;
             }
             yield return new WaitForSeconds(0.1f);//wait stops infinite loop from crashing game
         }
