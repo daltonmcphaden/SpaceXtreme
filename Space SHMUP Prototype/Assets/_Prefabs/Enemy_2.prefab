@@ -89,12 +89,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0158b263851401e4fb34728b10f41916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.1
+  speed: 0.1
   fireRate: 0.3
   health: 1
   score: 1
-  main: {fileID: 0}
   lifeTime: 10
+  projectilePrefab: {fileID: 1029548478288499213, guid: b061a66ea5059d64fb267ab79d418b29,
+    type: 3}
   points: []
   birthTime: 0
 --- !u!1 &7307581832557797610
