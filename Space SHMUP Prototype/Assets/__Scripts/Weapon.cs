@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum WeaponType // Enum definition for all the weapons
 {
-    none, blaster, spread, spray, missile, laser, shield
+    none, blaster, spread, spray, missile, laser, shield, enemy
 }
 
 [System.Serializable]
@@ -233,11 +233,7 @@ public class Weapon : MonoBehaviour
             gameObj.tag = "ProjectileHero";
             gameObj.layer = LayerMask.NameToLayer("ProjectileHero");
         }
-        else //same as above for enemy projactiles
-        {
-            gameObj.tag = "ProjectileEnemy";
-            gameObj.layer = LayerMask.NameToLayer("ProjectileEnemy");
-        }
+        
         gameObj.transform.position = collar.transform.position; // movement of weapon collar
         gameObj.transform.SetParent(PROJECTILE_ANCHOR, true);
         Projectile p = gameObj.GetComponent<Projectile>(); // sets a projectile pointer variable to projectile object

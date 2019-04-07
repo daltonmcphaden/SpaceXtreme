@@ -5,12 +5,13 @@ using UnityEngine;
 public class Enemy_1 : Enemy
 {
     private float _x0, _y0; //original positions
-
+    public GameObject projectilePrefab;
 
    // Start is called before the first frame update
     void Start()
     {
         _x0 = pos.x; // gets 1 original x pos from its starting point
+        InvokeRepeating("Shoot", Random.value * 2, 3.0f);
     }
 
     // Update is called once per frame
@@ -19,7 +20,7 @@ public class Enemy_1 : Enemy
         Move(); //calling the function for the ship to move
     }
 
-       public override void Move() //overriding base enemy class move
+    public override void Move() //overriding base enemy class move
     {
         //this block senses if the enemy started on the left and right, and moves it in the correct corresponding x direction
         Vector3 tempPos = pos;
@@ -43,6 +44,15 @@ public class Enemy_1 : Enemy
                 Destroy(gameObject);
             }
         }
+
+    }
+
+    void Shoot() {
+        
+        GameObject gameObj = Instantiate<GameObject>(projectilePrefab);
+        gameObj.transform.position = this.transform.position;
+        Projectile p = gameObj.GetComponent<Projectile>();
+        p.rigid.velocity = Vector3.down * 40;               // Projectile will fire downwards with a velocity of 40
 
     }
 }

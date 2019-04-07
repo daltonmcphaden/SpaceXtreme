@@ -72,7 +72,7 @@ public class Hero : MonoBehaviour
             fireDelegate();
         }
 
-        if (Input.GetKeyDown(KeyCode.F)){
+        if (Input.GetKeyDown(KeyCode.G)){
             CycleCurrentWeapon();
             aSource.PlayOneShot(swap,0.5f);
         }
@@ -101,6 +101,11 @@ public class Hero : MonoBehaviour
             // If the shield was triggered by a PowerUp
             AbsorbPowerUp(go);
         } 
+
+        else if (go.tag == "ProjectileEnemy") {
+            shieldLevel--;
+            Destroy(go);
+        }
         
         else {
             print("Triggered by non-enemy: " + go.name);
