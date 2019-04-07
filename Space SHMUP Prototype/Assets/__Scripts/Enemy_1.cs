@@ -39,6 +39,7 @@ public class Enemy_1 : Enemy
             if (pos.y < bndCheck.camHeight - bndCheck.radius)
             {
                 Main.enemyList.Remove(gameObject);//remove from enemy list
+                Main._enemysLeft--;
                 Destroy(gameObject);
             }
         }

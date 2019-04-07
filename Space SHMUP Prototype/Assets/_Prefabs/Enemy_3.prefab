@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d785907704892148a590bbd3b463fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: -1
+  radius: -2.5
   keepOnScreen: 0
   isOnScreen: 1
   camWidth: 0
@@ -164,7 +164,6 @@ MonoBehaviour:
   fireRate: 0
   health: 1
   score: 5
-  powerUpDropChance: 0
   rBody: {fileID: 0}
   target: {fileID: 0}
   force: 30

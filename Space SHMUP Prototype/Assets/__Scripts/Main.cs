@@ -17,6 +17,7 @@ public class Main : MonoBehaviour
     public GameObject           prefabPowerUp;      // this will hold the prefab for all powerups
     static public List<GameObject> enemyList; //list of active enemys
 
+    static public int _enemysLeft;//enemys left
     private float _numEnemy = 10, _numLevel = 1; //number of enemys spawned and level number
     private int _enemyClasses = 3; //how many different enemy types there are
   
@@ -115,6 +116,7 @@ public class Main : MonoBehaviour
                     int ndx = Random.Range(0, _enemyClasses);
                     GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]); //instantiates enemy prefabs
                     enemyList.Add(go);//add enemy to list
+                    _enemysLeft++;
 
                     float enemyPadding = enemyDefaultPadding;
                     if (go.GetComponent<BoundsCheck>() != null)
@@ -174,7 +176,7 @@ public class Main : MonoBehaviour
                 break;
             }
             
-            if (enemyList.Count==0) //once all the enemys in this level have been destroyed
+            if (_enemysLeft<=0) //once all the enemys in this level have been destroyed
             {
                 enemyList.Clear();//clear enemy list
                 _numLevel++; //increment level

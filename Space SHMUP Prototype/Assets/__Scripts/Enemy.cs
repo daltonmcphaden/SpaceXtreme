@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public float        speed = 0.1f; //base enemy move speed
     public float        fireRate = 0.3f; //fire rate to be implemented when the enemies start shooting
-    public float health=3; //base health
+    public float health; //base health
     //static public float healthBoost; //health boost every level
     public int          score; //score gained for destroying enemies
 
@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
 
         if (bndCheck != null && bndCheck.offDown) { // bounds check that destroys object if off screen
             Main.enemyList.Remove(gameObject);//remove from enemy list
+            Main._enemysLeft--;
             Destroy(gameObject);
         }
     }
@@ -61,14 +62,16 @@ public class Enemy : MonoBehaviour
                     Destroy(otherGO);
                     break;
                 }
+
                 health -= Main.GetWeaponDefinition(p.type).damageOnHit;
                 if (health <=0){
                     Main.PlayExp();
                     Main.S.ShipDestroyed(this);             // Tell the main singleton that this ship was destroyed
-                    this.gameObject.SetActive(false);
-                    Main.enemyList.Remove(this.gameObject);//remove from enemy list
-                    Destroy(this.gameObject); //Destroy this enemy
-                    Score.AddScore(this.score);
+                    gameObject.SetActive(false);
+                    Main.enemyList.Remove(gameObject);//remove from enemy list
+                    Main._enemysLeft--;
+                    Destroy(gameObject); //Destroy this enemy
+                    Score.AddScore(score);
                 }
                 //set projectile to inactive to remove bounce effect from the collision
                 otherGO.SetActive(false);
