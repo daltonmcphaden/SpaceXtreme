@@ -248,10 +248,10 @@ public class Hero : MonoBehaviour
                         Main.S.weaponDefinitions[4].delayBetweenShots = 1f;
                         break;
                     case 2:
-                        Main.S.weaponDefinitions[4].delayBetweenShots = 0.6f;
+                        Main.S.weaponDefinitions[4].delayBetweenShots = 0.8f;
                         break;
                     case 3:
-                        Main.S.weaponDefinitions[4].delayBetweenShots = 0.4f;
+                        Main.S.weaponDefinitions[4].delayBetweenShots = 0.6f;
                         break;
                 }
 
