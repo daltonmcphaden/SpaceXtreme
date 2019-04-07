@@ -185,7 +185,9 @@ public class Main : MonoBehaviour
                 allSpawned = false; //alow another wave to be spawned
 
                 yield return new WaitForSeconds(3); //wait 3 seconds before next wave
-
+                GameObject[] gos = GameObject.FindGameObjectsWithTag("PowerUp");
+                foreach(GameObject go in gos)
+                        Destroy(go);
                 Hero.S.ResetWeaponLevels();     // Reset all weapon levels back to zero
                 Hero.S.shieldLevel = 4;
             }
