@@ -22,7 +22,7 @@ public class Main : MonoBehaviour
     private int _enemyClasses = 3; //how many different enemy types there are
   
 
-    public Text currScoreText, highScoreText, restartText, gameOverText, levelText; // all UI text
+    public Text currScoreText, highScoreText, restartText, gameOverText, levelText, menuText; // all UI text
     private bool _gameOver = false, _restart = false, allSpawned = false;
     public WeaponType[] powerUpFrequency;   // Frequency of each powerup
     public float powerUpDropChance;
@@ -94,6 +94,9 @@ public class Main : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
             {
                 DelayedRestart(1f);
+            }else if (Input.GetKeyDown(KeyCode.M))//if m was pressed go to main menu
+            {
+                Menu();
             }
         }
     }
@@ -154,6 +157,7 @@ public class Main : MonoBehaviour
                     if (_gameOver) // if the hero ship dies this will break the spawn loop and desplay restart text
                     {
                         restartText.text = "Press 'R' For Restart";
+                        menuText.text = "Press 'M' For Main Menu";
                         _restart = true;
                         break;
                     }
@@ -172,6 +176,7 @@ public class Main : MonoBehaviour
             if (_gameOver) // if the hero ship dies this will break the spawn loop and desplay restart text
             {
                 restartText.text = "Press 'R' For Restart";
+                menuText.text = "Press 'M' For Main Menu";
                 _restart = true;
                 break;
             }
@@ -199,6 +204,17 @@ public class Main : MonoBehaviour
         }
         // Invoke the Restart() method in delay seconds
         Invoke("Restart", delay);
+    }
+    public void Menu()
+    {
+        //set high score
+        if (Score.score > Score.highScore)
+        {
+            Score.highScore = Score.score;
+            SetHighScore();
+        }
+        //load the menu
+        SceneManager.LoadScene("_Main Menu");
     }
 
     public void Restart() { // restarts the game

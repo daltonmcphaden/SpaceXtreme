@@ -6,8 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public float        speed = 0.1f; //base enemy move speed
     public float        fireRate = 0.3f; //fire rate to be implemented when the enemies start shooting
-    public float health; //base health
-    //static public float healthBoost; //health boost every level
+    public float health; 
     public int          score; //score gained for destroying enemies
 
     protected BoundsCheck bndCheck; //bounds check variable
@@ -23,7 +22,6 @@ public class Enemy : MonoBehaviour
 
     void Awake() {
         bndCheck = GetComponent<BoundsCheck>(); // set boundscheck components
-        //health += healthBoost;
     }
 
     // Update is called once per frame
