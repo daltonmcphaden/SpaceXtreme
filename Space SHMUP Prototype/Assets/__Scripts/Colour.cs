@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Colour : MonoBehaviour
 {
+    //Material for Hero ship
     public Material shipMat;
     
     void Start()
     {
+        //Initialize as white
         shipMat.color = Color.white;
     }
 
+    //Functions to change to each colour
     public void MakeWhite()
     {
         shipMat.color = Color.white;
