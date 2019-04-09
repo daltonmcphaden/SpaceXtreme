@@ -1132,7 +1132,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fb59767cc36a6504396b142bae782660, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 21d25f87e115c0148983ac1704185f5a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.315
   m_Pitch: 1
@@ -1808,7 +1808,7 @@ MonoBehaviour:
   - {fileID: 693637164}
   weaponLevels: 01000000010000000100000001000000
   _shieldLevel: 4
-  puGet: {fileID: 8300000, guid: 415e412552a0041419b883223f932dac, type: 3}
+  puGet: {fileID: 8300000, guid: 9975b64c8800fc64183011131108eb95, type: 3}
   swap: {fileID: 8300000, guid: cd79affa5c4fbad47adec420dd8c6ded, type: 3}
   aSource: {fileID: 835370836}
 --- !u!4 &835370834
@@ -1872,7 +1872,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 415e412552a0041419b883223f932dac, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9975b64c8800fc64183011131108eb95, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
