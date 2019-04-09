@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum WeaponType // Enum definition for all the weapons
 {
-    none, blaster, spread, spray, missile, laser, shield, enemy
+    none, blaster, spread, spray, missile, shield, enemy
 }
 
 [System.Serializable]
