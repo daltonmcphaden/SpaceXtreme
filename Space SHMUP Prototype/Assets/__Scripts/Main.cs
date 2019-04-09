@@ -62,7 +62,7 @@ public class Main : MonoBehaviour
 
         enemyList = new List<GameObject>();//initialise list
 
-        StartCoroutine(SpawnEnemy()); // Creates enemy objects from the prefabs
+        StartCoroutine(LevelProgression()); // Creates enemy objects from the prefabs
 
         //dictionary with weapontype as the key
         WEAP_DICT = new Dictionary<WeaponType, WeaponDefinition>();
@@ -101,7 +101,7 @@ public class Main : MonoBehaviour
         }
     }
 
-    public IEnumerator SpawnEnemy() //spawns enemies
+    public IEnumerator LevelProgression() //progresses levels and spawns enemies
     {
         yield return new WaitForSeconds(2); //2 second before game starts 
 
@@ -113,7 +113,7 @@ public class Main : MonoBehaviour
             if (!allSpawned)//makes sure the for loop only runs once per level
             {
                 ausSource.PlayOneShot(newlvl);
-                for (int i = 0; i < _numEnemy; i++)
+                for (int i = 0; i < _numEnemy; i++) //spawn enemies
                 {
                     // The enemy to be spawned is randomly selected from the array containing each type of enemy
                     int ndx = Random.Range(0, _enemyClasses);
