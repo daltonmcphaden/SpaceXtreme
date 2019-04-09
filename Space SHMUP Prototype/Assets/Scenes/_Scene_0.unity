@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1808,7 +1808,7 @@ MonoBehaviour:
   - {fileID: 693637164}
   weaponLevels: 01000000010000000100000001000000
   _shieldLevel: 4
-  puGet: {fileID: 8300000, guid: 415e412552a0041419b883223f932dac, type: 3}
+  puGet: {fileID: 8300000, guid: 9975b64c8800fc64183011131108eb95, type: 3}
   swap: {fileID: 8300000, guid: cd79affa5c4fbad47adec420dd8c6ded, type: 3}
   aSource: {fileID: 835370836}
 --- !u!4 &835370834
@@ -1872,7 +1872,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 415e412552a0041419b883223f932dac, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9975b64c8800fc64183011131108eb95, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
