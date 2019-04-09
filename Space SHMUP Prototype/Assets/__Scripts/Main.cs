@@ -17,7 +17,7 @@ public class Main : MonoBehaviour
     public GameObject           prefabPowerUp;      // this will hold the prefab for all powerups
     static public List<GameObject> enemyList; //list of active enemys
 
-    static public int _enemysLeft;//enemys left
+    static public int enemysLeft;//enemys left
     private float _numEnemy = 10, _numLevel = 1; //number of enemys spawned and level number
     private int _enemyClasses = 3; //how many different enemy types there are
   
@@ -119,7 +119,7 @@ public class Main : MonoBehaviour
                     int ndx = Random.Range(0, _enemyClasses);
                     GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]); //instantiates enemy prefabs
                     enemyList.Add(go);//add enemy to list
-                    _enemysLeft++;
+                    enemysLeft++;
 
                     float enemyPadding = enemyDefaultPadding;
                     if (go.GetComponent<BoundsCheck>() != null)
@@ -181,20 +181,21 @@ public class Main : MonoBehaviour
                 break;
             }
             
-            if (_enemysLeft<=0) //once all the enemys in this level have been destroyed
+            if (enemysLeft<=0) //once all the enemys in this level have been destroyed
             {
                 enemyList.Clear();//clear enemy list
                 _numLevel++; //increment level
                 _numEnemy += 5; //make more enemys than previous level
-                //Enemy.healthBoost = 0.5f;//add extra health next level
                 allSpawned = false; //alow another wave to be spawned
 
-                yield return new WaitForSeconds(3); //wait 3 seconds before next wave
+                
                 GameObject[] gos = GameObject.FindGameObjectsWithTag("PowerUp");
                 foreach(GameObject go in gos)
                         Destroy(go);
                 Hero.S.ResetWeaponLevels();     // Reset all weapon levels back to zero
                 Hero.S.shieldLevel = 4;
+
+                yield return new WaitForSeconds(3); //wait 3 seconds before next wave
             }
             yield return new WaitForSeconds(0.1f);//wait stops infinite loop from crashing game
         }

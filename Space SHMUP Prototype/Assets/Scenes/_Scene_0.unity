@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -904,8 +904,8 @@ MonoBehaviour:
   gameOverText: {fileID: 1963404525}
   levelText: {fileID: 1361954085}
   menuText: {fileID: 1969842417}
-  powerUpFrequency: 010000000400000004000000040000000600000002000000
-  powerUpDropChance: 0.25
+  powerUpFrequency: 010000000200000003000000040000000600000006000000
+  powerUpDropChance: 0.35
   newlvl: {fileID: 8300000, guid: 7f14a4e6252bae340af795faf6e7bbd4, type: 3}
   exp: {fileID: 8300000, guid: d1495e5169bd3204db114d9c40e360fa, type: 3}
   ausSource: {fileID: 534669908}

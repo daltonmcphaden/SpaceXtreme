@@ -27,8 +27,9 @@ public class Projectile : MonoBehaviour
     }
 
 
-    void Awake() // gets components
+    void Awake() 
     {
+        // Get the boundscheck, renderer and rigidbody components for this projectile
         _bndCheck = GetComponent<BoundsCheck>();
         _rend = GetComponent<Renderer>();
         rigid = GetComponent<Rigidbody>();
@@ -41,7 +42,7 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
     }
 
-    //sets the _type feild and colors the projectile to match the weaponDefinition
+    // Sets the _type feild and colors the projectile to match the weaponDefinition
     public void SetType(WeaponType eType)
     {
         _type = eType;

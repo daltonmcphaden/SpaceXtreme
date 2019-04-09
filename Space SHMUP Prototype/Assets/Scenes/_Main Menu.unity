@@ -1820,7 +1820,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.6900024, y: -185.08997}
+  m_AnchoredPosition: {x: 1.6900024, y: -171.4}
   m_SizeDelta: {x: -3.38, y: -370.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2135746367
@@ -1843,8 +1843,14 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "Dalton McPhaden, Roy De La Cruz, Spencer Vecile, Logan Massecar\nCopyright
-    \xA92019"
+  m_text: 'Designed by:
+
+    Dalton McPhaden, Roy De La Cruz, Spencer Vecile, Logan Massecar
+
+
+    Audio from:
+
+    Nintendo of America, Blizzard Entertainment, and Re-Logic'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 8b29aaa3eec7468097ff07adfcf29ac9, type: 2}
@@ -1890,7 +1896,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 78
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1913,12 +1919,12 @@ MonoBehaviour:
   m_margin: {x: -2.9557474, y: -1.5105952, z: -0.7584433, w: 0}
   m_textInfo:
     textComponent: {fileID: 0}
-    characterCount: 79
+    characterCount: 147
     spriteCount: 0
-    spaceCount: 11
-    wordCount: 12
+    spaceCount: 21
+    wordCount: 21
     linkCount: 0
-    lineCount: 2
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0

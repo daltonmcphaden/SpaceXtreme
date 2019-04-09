@@ -9,7 +9,7 @@ public class Enemy_3 : Enemy
     public Rigidbody rBody;
     public Transform target;
     public float force, rotationForce, distance, triggerDist;
-    private bool trigger=false;
+    private bool _trigger=false;
    
     // Start is called before the first frame update
     void Start()
@@ -33,10 +33,10 @@ public class Enemy_3 : Enemy
             distance = Vector3.Distance(rBody.position, target.position);
 
             //see if the hero ship has moved within trigger distance of the asteroid
-            if (distance < triggerDist) trigger = true;
+            if (distance < triggerDist) _trigger = true;
 
             //seperate if statement so if the ship moves out of trigger distance the rock will keep following
-            if (!trigger)
+            if (!_trigger)
             {
                 //if the ship has not entered trigger distance move down the screen
                 base.Move();
@@ -55,14 +55,14 @@ public class Enemy_3 : Enemy
             if (pos.y < bndCheck.camHeight - bndCheck.radius)
             {
                 Main.enemyList.Remove(gameObject);//remove from enemy list
-                Main._enemysLeft--;
+                Main.enemysLeft--;
                 Destroy(gameObject);
             }
         }
         if (bndCheck.offLeft || bndCheck.offRight) //this enemy should never go off the screen to the left or right
         {
             Main.enemyList.Remove(gameObject);//remove from enemy list
-            Main._enemysLeft--;
+            Main.enemysLeft--;
             Destroy(gameObject);
         }
     }

@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
 
         if (bndCheck != null && bndCheck.offDown) { // bounds check that destroys object if off screen
             Main.enemyList.Remove(gameObject);//remove from enemy list
-            Main._enemysLeft--;
+            Main.enemysLeft--;
             Destroy(gameObject);
         }
     }
@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
                     Main.S.ShipDestroyed(this);             // Tell the main singleton that this ship was destroyed
                     gameObject.SetActive(false);
                     Main.enemyList.Remove(gameObject);//remove from enemy list
-                    Main._enemysLeft--;
+                    Main.enemysLeft--;
                     Destroy(gameObject); //Destroy this enemy
                     Score.AddScore(score);
                 }
