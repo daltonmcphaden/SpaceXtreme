@@ -180,7 +180,7 @@ public class Weapon : MonoBehaviour
             case WeaponType.missile:
                 
                 //make sure there is an enemy object
-                if (Main._enemysLeft> 0)
+                if (Main.enemysLeft> 0)
                 {
                     m = MakeProjectile();
                     //get closest target 
