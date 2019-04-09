@@ -40,12 +40,12 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        collar = transform.Find("Collar").gameObject;
-        gun = transform.Find("Barrel").gameObject;
-        _collarRend = collar.GetComponent<Renderer>();
-        _gunColor = gun.GetComponent<Renderer>();
+        collar = transform.Find("Collar").gameObject;       // Finds the weapon collar
+        gun = transform.Find("Barrel").gameObject;          // Finds the weapon barrel
+        _collarRend = collar.GetComponent<Renderer>();      // Sets the collar renderer
+        _gunColor = gun.GetComponent<Renderer>();           // Sets the barrel renderer
 
-        //set the default type
+        //set the default type of weapon
         SetType(_type);
 
         //dynamicaly create an anchor for all projectiles
@@ -62,13 +62,15 @@ public class Weapon : MonoBehaviour
             rootGO.GetComponent<Hero>().fireDelegate += Fire;
         }
     }
-//gets and sets weapon type
+
+    //gets and sets weapon type
     public WeaponType type
     {
         get { return _type; }
         set { SetType(value); }
     }
-//sets weapon type and if nothing is passed sets it to default weapon
+
+    //sets weapon type and if nothing is passed sets it to default weapon
     public void SetType(WeaponType weaponType)
     {
         _type = weaponType;
@@ -82,8 +84,8 @@ public class Weapon : MonoBehaviour
             this.gameObject.SetActive(true);
         }
 
-        def = Main.GetWeaponDefinition(_type);
-        _collarRend.material.color = def.color; // sets collar colour depending on weapon in use
+        def = Main.GetWeaponDefinition(_type);  // Get the weapon definition
+        _collarRend.material.color = def.color; // Set collar colour depending on weapon in use
         _gunColor.material.color = def.color;   // Set gun color depending on weapon in use
         lastShotTime = 0; 
     }
@@ -109,7 +111,7 @@ public class Weapon : MonoBehaviour
         {
             case WeaponType.blaster:
                 p = MakeProjectile();
-                p.rigid.velocity = vel;
+                p.rigid.velocity = vel;         // Fire projectile directly up
                 ausource.PlayOneShot(fire,_vol);
                 break;
 
@@ -121,7 +123,7 @@ public class Weapon : MonoBehaviour
 
                         // Right projectile
                         p = MakeProjectile();
-                        p.transform.rotation = Quaternion.AngleAxis(15, Vector3.back); 
+                        p.transform.rotation = Quaternion.AngleAxis(15, Vector3.back); // Fire on a 15 degree angle
                         p.rigid.velocity = p.transform.rotation * vel;
 
                         // Center projectile
@@ -130,7 +132,7 @@ public class Weapon : MonoBehaviour
 
                         // Left projectile
                         p = MakeProjectile();
-                        p.transform.rotation = Quaternion.AngleAxis(-15, Vector3.back);
+                        p.transform.rotation = Quaternion.AngleAxis(-15, Vector3.back); // Fire on a 15 degree angle
                         p.rigid.velocity = p.transform.rotation * vel;
 
                         break;
@@ -138,29 +140,29 @@ public class Weapon : MonoBehaviour
                     case 2:
                         // Right projectile
                         p = MakeProjectile();
-                        p.transform.rotation = Quaternion.AngleAxis(30, Vector3.back); 
+                        p.transform.rotation = Quaternion.AngleAxis(30, Vector3.back); // Fire on a 30 degree angle
                         p.rigid.velocity = p.transform.rotation * vel;
 
                         // Left projectile
                         p = MakeProjectile();
-                        p.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back);
+                        p.transform.rotation = Quaternion.AngleAxis(-30, Vector3.back); // Fire on a 30 degree angle
                         p.rigid.velocity = p.transform.rotation * vel;
 
-                        goto case 1;
+                        goto case 1;        // Needed to instantiate the 3 other projectiles
 
                     case 3:
 
                         // Right projectile
                         p = MakeProjectile();
-                        p.transform.rotation = Quaternion.AngleAxis(45, Vector3.back); 
+                        p.transform.rotation = Quaternion.AngleAxis(45, Vector3.back); // Fire on a 45 degree angle
                         p.rigid.velocity = p.transform.rotation * vel;
 
                         // Left projectile
                         p = MakeProjectile();
-                        p.transform.rotation = Quaternion.AngleAxis(-45, Vector3.back);
+                        p.transform.rotation = Quaternion.AngleAxis(-45, Vector3.back); // Fire on a 45 degree angle
                         p.rigid.velocity = p.transform.rotation * vel;
 
-                        goto case 2;
+                        goto case 2;        // Needed to instantiate the 5 other projectiles
 
                 }
                 ausource.PlayOneShot(fire, 0.8f);

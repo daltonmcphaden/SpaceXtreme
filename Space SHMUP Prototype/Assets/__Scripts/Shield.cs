@@ -8,7 +8,7 @@ public class Shield : MonoBehaviour
     public float    rotationsPerSecond = 0.1f;
 
     [Header("Set Dynamically")]
-    public int      levelShown = 4;
+    public int      levelShown = 4;     // Starting shield level is 4
 
     // This private variable will not appear in the Inspector
     private Material _mat;
